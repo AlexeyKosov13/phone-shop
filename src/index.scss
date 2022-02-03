@@ -1,0 +1,365 @@
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui;
+    background-color: #E7F6FF;
+
+}
+h1,h2,h3,p {
+    margin: 0;
+}
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul,
+ol {
+  padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  outline: none;
+}
+
+/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.wrapper {
+    background-color: #fff;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
+    border-radius: 20px;
+    max-width: 1080px;
+    margin: 50px auto;  
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+    border-bottom: 1px solid #EAEAEA;
+    
+}
+.logo__img {
+    margin-right: 15px;
+}
+
+.header__logo {
+    display: flex;
+    align-items: center;
+    h3 {
+        text-transform: uppercase;
+    }
+    p {
+        color: #9D9D9D;
+    }
+}
+.header__basket {
+    display: flex;
+    align-items: center;
+    svg {
+       margin-right: 6px;
+    }
+    li {
+        display: flex;
+        align-items: center;
+        margin-right: 15px;
+    }
+}
+.content {
+    padding: 40px;
+    h1 {
+        
+    }
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+    }
+    &__search {
+        border-radius: 10px;
+        border: 1px solid #f3f3f3;
+        padding: 0 15px;
+        display: flex;
+        input {
+            border: 0;
+            padding: 10px;
+            font-size: 16px;
+            width: 200px;
+        }
+    }
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -20px;
+    margin-left: -20px;
+    justify-content: space-between;
+}
+.favorite {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.card {
+    position: relative;
+    border: 1px solid #F3F3F3;
+    padding: 30px;
+    width: 210px;
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-left: 20px;
+    transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+    
+    &:hover {
+      box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.06);
+      transform: translateY(-5px);
+
+    }
+    p {
+        font-size: 14px;
+        line-height: 17px;
+        color: #000000;
+        margin-bottom: 14px;
+    }
+    &__info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__price {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        span {
+            display: block;
+            font-size: 11px;
+            line-height: 13px;
+            text-transform: uppercase;
+            color: #BDBDBD;
+            margin-bottom: 2px;
+        }
+        p {
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 17px;
+        }
+
+    }
+    .button {
+        background: #FFFFFF;
+        border: 1px solid #F2F2F2;
+        border-radius: 8px;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+    }
+}
+.drawer__overlay {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  h2 {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+}
+
+.drawer {
+  position: absolute;
+  width: 430px;
+  height: 100%;
+  right: 0;
+  background: #ffffff;
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.cart__items {
+  flex: 1;
+  overflow: auto;
+  margin-bottom: 40px;
+}
+.cart__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #f3f3f3;
+  border-radius: 20px;
+  overflow: hidden;
+  min-height: 90px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.cart__img {
+  margin-right: 15px;
+  align-self: start;
+}
+
+.cart__info {
+  font-size: 16px;
+  line-height: 17px;
+  margin-right: 20px;
+  p {
+    margin-bottom: 5px;
+  }
+  b {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+
+.btn__remove {
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out ;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.cart__total {
+  font-size: 16px;
+  line-height: 19px;
+  ul {
+    margin-bottom: 30px;
+  }
+  li {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: flex-end;
+  }
+  
+  span {
+    font-size: 16px;
+    line-height: 19px;
+  }
+  div {
+    flex: 1;
+    height: 1px;
+    border-bottom: 1px dashed #DFDFDF;
+    position: relative;
+    top: -4px;
+    margin:  0 7px;
+  }
+  b {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+  }
+  .green__button {
+    position: relative;
+    &:hover {
+      img {
+        transform: translateX(5px);
+      }
+      
+    }
+    img {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      transition: transform 0.2s ease-in-out;
+    }
+  }
+  
+}
+
+.green__button { 
+    width: 100%;
+    height: 55px;
+    background: #9dd558;
+    border-radius: 18px;
+    border: 0;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+    &:hover { 
+      background: lighten($color: #9dd558, $amount: 20%);
+    }
+    &:active { 
+      background: darken($color: #9dd558, $amount:5%);
+    }
+}
