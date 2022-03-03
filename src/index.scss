@@ -56,7 +56,9 @@ ol[class] {
 a:not([class]) {
   text-decoration-skip-ink: auto;
 }
-
+a {
+  text-decoration: none;
+}
 /* Упрощаем работу с изображениями */
 img {
   max-width: 100%;
@@ -120,19 +122,32 @@ header {
 .header__basket {
     display: flex;
     align-items: center;
+    cursor: pointer;
+    
     svg {
        margin-right: 6px;
     }
     li {
         display: flex;
         align-items: center;
-        margin-right: 15px;
+       // margin-right: 30px;
     }
 }
+
+.header__cart {
+  margin-right: 30px;
+}
+
+.header__favorite {
+  margin-right: 30px;
+}
+
 .content {
     padding: 40px;
-    h1 {
-        
+    &__favorites {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
     }
     &__header {
         display: flex;
@@ -145,6 +160,7 @@ header {
         border: 1px solid #f3f3f3;
         padding: 0 15px;
         display: flex;
+        position: relative;
         input {
             border: 0;
             padding: 10px;
@@ -152,6 +168,13 @@ header {
             width: 200px;
         }
     }
+}
+
+.clear {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  cursor: pointer;
 }
 
 .products {
@@ -168,96 +191,63 @@ header {
   cursor: pointer;
 }
 
-.card {
-    position: relative;
-    border: 1px solid #F3F3F3;
-    padding: 30px;
-    width: 210px;
-    border-radius: 40px;
-    display: flex;
-    flex-direction: column;
-    margin-right: 20px;
-    margin-left: 20px;
-    transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
-    
-    &:hover {
-      box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.06);
-      transform: translateY(-5px);
 
-    }
-    p {
-        font-size: 14px;
-        line-height: 17px;
-        color: #000000;
-        margin-bottom: 14px;
-    }
-    &__info {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    &__price {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        span {
-            display: block;
-            font-size: 11px;
-            line-height: 13px;
-            text-transform: uppercase;
-            color: #BDBDBD;
-            margin-bottom: 2px;
-        }
-        p {
-            font-weight: bold;
-            font-size: 14px;
-            line-height: 17px;
-        }
 
-    }
-    .button {
-        background: #FFFFFF;
-        border: 1px solid #F2F2F2;
-        border-radius: 8px;
-        width: 32px;
-        height: 32px;
-        cursor: pointer;
-    }
-}
-.drawer__overlay {
-  display: none;
-  position: absolute;
-  left: 0;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-  h2 {
-    margin-bottom: 30px;
-    display: flex;
-    justify-content: space-between;
-  }
 
-}
-
-.drawer {
-  position: absolute;
-  width: 430px;
-  height: 100%;
-  right: 0;
-  background: #ffffff;
-  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
-  padding: 30px;
+.drawer__block {
   display: flex;
   flex-direction: column;
-  
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
+.cart__empty {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  align-self: center;
+  p {
+    margin-bottom: 20px;
+  }
+  .green__button {
+    position: relative;
+    &:disabled {
+      animation: button-loading 0.8s ease-in-out infinite;
+    }
+    &:hover {
+      img {
+        //transform: translateX(-5px);
+      }
+      
+    }
+    img {
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      transform: scaleX(-1);
+      transition: transform 0.2s ease-in-out;
+    }
+  }
+} 
+.empty__img {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 30px;
+}
+.cart__block {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 .cart__items {
   flex: 1;
   overflow: auto;
-  margin-bottom: 40px;
+  margin-bottom: 100px;
 }
 .cart__item {
   display: flex;
@@ -329,6 +319,10 @@ header {
   }
   .green__button {
     position: relative;
+    &:disabled {
+      background-color: #bebebe;
+      cursor: default;
+    }
     &:hover {
       img {
         transform: translateX(5px);
@@ -362,4 +356,16 @@ header {
     &:active { 
       background: darken($color: #9dd558, $amount:5%);
     }
+}
+
+@keyframes button-loading {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
 }
