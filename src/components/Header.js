@@ -11,7 +11,7 @@ function Header(props) {
       <Link to="/">
         <div className="header__logo">
           <img
-            src="/img/logo.png"
+            src="img/logo.png"
             width={40}
             height={40}
             className="logo__img"
@@ -59,12 +59,12 @@ function Header(props) {
         </li>
         <li className="header__favorite">
           <Link to="/favorites">
-            <img src="/img/heart.svg" alt="favorite" />
+            <img src="img/heart.svg" alt="favorite" />
           </Link>
         </li>
         <li>
         <Link to="/orders">
-            <img src="/img/user.svg" alt="user" />
+            <img src="img/user.svg" alt="user" />
           </Link>
         </li>
       </ul>
