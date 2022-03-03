@@ -39,10 +39,10 @@ function Home({
           {searchValue ? `Поиск по запросу: "${searchValue}"` : "Все кроссовки"}
         </h1>
         <div className="content__search">
-          <img src="/img/search.svg" alt="search" />
+          <img src="img/search.svg" alt="search" />
           {searchValue && (
             <img
-              src="/img/cart__remove.svg"
+              src="img/cart__remove.svg"
               alt="clear"
               className="clear"
               onClick={() => setSearchValue("")}
