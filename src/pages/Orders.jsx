@@ -4,7 +4,7 @@ import Card from "../components/Card";
 import AppContext from "../context";
 
 function Orders() {
-  const { onAddToFavorites, onAddToCart, isItemAdded } =
+  const { isItemAdded } =
     React.useContext(AppContext);
   const [orders, setOrders] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);

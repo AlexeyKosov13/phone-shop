@@ -1,7 +1,7 @@
 .card {
     position: relative;
     border: 1px solid #F3F3F3;
-    padding: 30px;
+    padding: 20px;
     width: 210px;
     border-radius: 40px;
     display: flex;
@@ -16,20 +16,32 @@
       transform: translateY(-5px);
 
     }
+    .favorite {
+        margin-bottom: 5px;
+    }
+
     .plus {
         cursor: pointer;
     }
+
     p {
         font-size: 14px;
         line-height: 17px;
         color: #000000;
         margin-bottom: 14px;
+        margin-top: 10px;
     }
+
+    &__image {
+        align-self: center;
+    }
+
     &__info {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
+
     &__price {
         display: flex;
         flex-direction: column;
@@ -42,6 +54,7 @@
             color: #BDBDBD;
             margin-bottom: 2px;
         }
+
         p {
             font-weight: bold;
             font-size: 14px;

@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "../components/Card";
+import { Slider } from "../components/Slider";
 import AppContext from "../context";
 
 function Home({
@@ -34,9 +35,10 @@ function Home({
 
   return (
     <div className="content">
+      <Slider />
       <div className="content__header">
         <h1>
-          {searchValue ? `Поиск по запросу: "${searchValue}"` : "Все кроссовки"}
+          {searchValue ? `Поиск по запросу: "${searchValue}"` : "Все телефоны"}
         </h1>
         <div className="content__search">
           <img src="img/search.svg" alt="search" />

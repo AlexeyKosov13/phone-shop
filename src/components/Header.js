@@ -12,14 +12,14 @@ function Header(props) {
         <div className="header__logo">
           <img
             src="img/logo.png"
-            width={40}
-            height={40}
+            width={50}
+            height={50}
             className="logo__img"
             alt="logo"
           />
           <div className="header__name">
-            <h3>React Sneakers</h3>
-            <p>Магазин лучших кросовок</p>
+            <h3>Phone-shop</h3>
+            <p>Магазин дешевых телефонов</p>
           </div>
         </div>
       </Link>

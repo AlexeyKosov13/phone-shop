@@ -52,8 +52,8 @@ function Card({
             onClick={onClickFavorite}
           />)}
         </div>
-        <img src={imageUrl} alt="sneakers" width={133} height={112} />
-        <p>{name}</p>
+        <img src={imageUrl} alt="phone" width={133} height={142} className={styles.card__image} />
+        <p className={styles.card__name}>{name}</p>
         <div className={styles.card__info}>
           <div className={styles.card__price}>
             <span>Цена:</span>
