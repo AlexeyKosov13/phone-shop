@@ -35,7 +35,7 @@ function Home({
 
   return (
     <div className="content">
-      <Slider />
+      {/* <Slider /> */}
       <div className="content__header">
         <h1>
           {searchValue ? `Поиск по запросу: "${searchValue}"` : "Все телефоны"}
