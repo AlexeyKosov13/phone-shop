@@ -2,7 +2,7 @@
   "name": "shop-shoes",
   "version": "0.1.0",
   "private": true,
-  "homepages": "https://alexeykosov13.github.io/shop-shoes/",
+  "homepages": "https://alexeykosov13.github.io/shop-shoes",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
