@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from "react";
-import slide1 from "../../img/promo/1.jpg";
-import slide2 from "../../img/promo/2.jpg";
-import slide3 from "../../img/promo/3.jpg";
-import slide4 from "../../img/promo/4.jpg";
-import slide5 from "../../img/promo/5.jpg";
 
 const img = [
-  <img key={slide1} src={slide1} />,
-  <img key={slide2} src={slide2} />,
-  <img key={slide3} src={slide3} />,
-  <img key={slide4} src={slide4} />,
-  <img key={slide5} src={slide5} />,
+  <img key={1} src='img/promo/1.jpg' />,
+  <img key={2} src='img/promo/2.jpg' />,
+  <img key={3} src='img/promo/3.jpg' />,
+  <img key={4} src='img/promo/4.jpg' />,
+  <img key={5} src='img/promo/5.jpg' />,
 ];
 
 export function Slider() {
