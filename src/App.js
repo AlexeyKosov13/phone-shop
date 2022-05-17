@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { HashRouter, Route } from "react-router-dom";
 import axios from "axios";
 
 import Home from "./pages/Home";
@@ -107,49 +107,52 @@ function App() {
   };
 
   return (
-    <AppContext.Provider
-      value={{
-        items,
-        cartItems,
-        favorites,
-        isItemAdded,
-        onAddToCart,
-        onAddToFavorites,
-        setCartOpened,
-        setCartItems,
-      }}
-    >
-      <div className="wrapper">
-        <Drawer
-          items={cartItems}
-          onRemove={onRemoveItem}
-          onClose={() => setCartOpened(false)}
-          opened={cartOpened}
-        />
-        <Header onClickCart={() => setCartOpened(true)} />
-
-        <Route path="/" exact>
-          <Home
-            items={items}
-            cartItems={cartItems}
-            searchValue={searchValue}
-            setSearchValue={setSearchValue}
-            onChangeSearchInput={onChangeSearchInput}
-            onAddToFavorites={onAddToFavorites}
-            onAddToCart={onAddToCart}
-            isLoading={isLoading}
+    <HashRouter>
+        <AppContext.Provider
+        value={{
+          items,
+          cartItems,
+          favorites,
+          isItemAdded,
+          onAddToCart,
+          onAddToFavorites,
+          setCartOpened,
+          setCartItems,
+        }}
+      >
+        <div className="wrapper">
+          <Drawer
+            items={cartItems}
+            onRemove={onRemoveItem}
+            onClose={() => setCartOpened(false)}
+            opened={cartOpened}
           />
-        </Route>
+          <Header onClickCart={() => setCartOpened(true)} />
 
-        <Route path="/favorites" exact>
-          <Favorites />
-        </Route>
+          <Route path="/" exact>
+            <Home
+              items={items}
+              cartItems={cartItems}
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+              onChangeSearchInput={onChangeSearchInput}
+              onAddToFavorites={onAddToFavorites}
+              onAddToCart={onAddToCart}
+              isLoading={isLoading}
+            />
+          </Route>
 
-        <Route path="/orders" exact>
-          <Orders />
-        </Route>
-      </div>
-    </AppContext.Provider>
+          <Route path="/favorites" exact>
+            <Favorites />
+          </Route>
+
+          <Route path="/orders" exact>
+            <Orders />
+          </Route>
+        </div>
+      </AppContext.Provider>
+    </HashRouter>
+    
   );
 }
 
