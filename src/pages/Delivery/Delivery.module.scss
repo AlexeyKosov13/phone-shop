@@ -1,0 +1,26 @@
+.delivery {
+    padding: 50px 70px;
+
+    &__block {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    ul {
+        width: 500px;
+    }
+
+    h3 {
+        margin: 15px 0 15px 0;
+    }
+
+    h4 {
+        margin-bottom: 10px;
+    }
+
+    img {
+        width: 300px;
+    }
+}

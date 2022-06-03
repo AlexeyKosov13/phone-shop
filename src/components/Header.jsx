@@ -24,6 +24,13 @@ function Header(props) {
         </div>
       </Link>
 
+    <nav className="header__nav">
+        <Link to="/"><div className="nav__item">Каталог</div></Link>
+        <Link to="/delivery"><div className="nav__item">Доставка</div></Link>
+        <Link to="/guarantees"><div className="nav__item">Гарантии</div></Link>
+       
+    </nav>
+
       <ul className="header__basket">
         <li onClick={props.onClickCart} className="header__cart">
           <svg

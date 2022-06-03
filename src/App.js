@@ -4,9 +4,12 @@ import axios from "axios";
 
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
+import Guarantees from "./pages/Guarantees/Guarantees";
+import Delivery from "./pages/Delivery/Delivery";
 import Orders from "./pages/Orders";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer/";
+import Footer from "./components/Footer";
 import AppContext from "./context";
 
 function App() {
@@ -142,6 +145,8 @@ function App() {
             />
           </Route>
 
+          
+
           <Route path="/favorites" exact>
             <Favorites />
           </Route>
@@ -149,7 +154,19 @@ function App() {
           <Route path="/orders" exact>
             <Orders />
           </Route>
+
+          <Route path="/guarantees" exact>
+            <Guarantees />
+          </Route>
+
+          <Route path="/delivery" exact>
+            <Delivery />
+          </Route>
+
+          <Footer />
         </div>
+
+       
       </AppContext.Provider>
     </HashRouter>
     

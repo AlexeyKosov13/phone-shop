@@ -136,6 +136,19 @@ header {
     }
 }
 
+.header__nav {
+  display: flex;
+
+  .nav__item {
+    margin-right: 10px;
+    transition: all 0.5s;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
 .header__cart {
   margin-right: 30px;
 }

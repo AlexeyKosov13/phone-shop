@@ -1,0 +1,55 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(46, 46, 46);
+    color: rgb(173, 167, 167);
+    padding: 15px 20px;
+
+    &__address {
+        display: flex;
+        max-width: 300px;
+        flex-direction: column;
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: inherit;
+            transition: all 0.5s ;
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+
+    &__menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 300px;
+
+        .menu__left {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            width: 150px;
+        }
+
+        .menu__right {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            width: 150px;
+        }
+
+        a {
+            display: block;
+            color: inherit;
+            transition: all 0.5s ;
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+}
