@@ -1,17 +1,20 @@
 import React from "react";
 import { HashRouter, Route } from "react-router-dom";
 import axios from "axios";
+import { Provider } from "react-redux";
 
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import Guarantees from "./pages/Guarantees/Guarantees";
-import PhonePage from './pages/phone-page/PhonePage';
+import PhonePage from "./pages/phone-page/PhonePage";
 import Delivery from "./pages/Delivery/Delivery";
 import Orders from "./pages/Orders";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer/";
 import Footer from "./components/Footer";
+import About from "./pages/About/About";
 import AppContext from "./context";
+import { store } from "./redux";
 
 function App() {
   console.log(`${process.env.REACT_APP_BASE}/Items`);
@@ -50,17 +53,16 @@ function App() {
 
   const onAddToCart = async (obj) => {
     try {
-      const findItem = cartItems.find((item) => Number(item.parentId) === Number(obj.id));
+      const findItem = cartItems.find(
+        (item) => Number(item.parentId) === Number(obj.id)
+      );
       if (findItem) {
         setCartItems((prev) =>
           prev.filter((item) => Number(item.parentId) !== Number(obj.id))
         );
-        await axios.delete(
-          `${process.env.REACT_APP_BASE}/Cart/${findItem.id}`
-        );
-      } else {  
-        
-        const {data} = await axios.post(
+        await axios.delete(`${process.env.REACT_APP_BASE}/Cart/${findItem.id}`);
+      } else {
+        const { data } = await axios.post(
           `${process.env.REACT_APP_BASE}/Cart`,
           obj
         );
@@ -74,9 +76,7 @@ function App() {
   const onAddToFavorites = async (obj) => {
     try {
       if (favorites.find((favObj) => Number(favObj.id) === Number(obj.id))) {
-        axios.delete(
-          `${process.env.REACT_APP_BASE}/favorites/${obj.id}`
-        );
+        axios.delete(`${process.env.REACT_APP_BASE}/favorites/${obj.id}`);
         setFavorites((prev) =>
           prev.filter((item) => Number(item.id) !== Number(obj.id))
         );
@@ -112,70 +112,73 @@ function App() {
   };
 
   return (
-    <HashRouter>
+    <Provider store={store}>
+      <HashRouter>
         <AppContext.Provider
-        value={{
-          items,
-          cartItems,
-          favorites,
-          isItemAdded,
-          onAddToCart,
-          onAddToFavorites,
-          setCartOpened,
-          setCartItems,
-        }}
-      >
-        <div className="wrapper">
-          <Drawer
-            items={cartItems}
-            onRemove={onRemoveItem}
-            onClose={() => setCartOpened(false)}
-            opened={cartOpened}
-          />
-          <Header onClickCart={() => setCartOpened(true)} />
-
-          <Route path="/" exact>
-            <Home
-              items={items}
-              cartItems={cartItems}
-              searchValue={searchValue}
-              setSearchValue={setSearchValue}
-              onChangeSearchInput={onChangeSearchInput}
-              onAddToFavorites={onAddToFavorites}
-              onAddToCart={onAddToCart}
-              isLoading={isLoading}
+          value={{
+            items,
+            cartItems,
+            favorites,
+            isItemAdded,
+            onAddToCart,
+            onAddToFavorites,
+            setCartOpened,
+            setCartItems,
+          }}
+        >
+          <div className="wrapper">
+            <Drawer
+              items={cartItems}
+              onRemove={onRemoveItem}
+              onClose={() => setCartOpened(false)}
+              opened={cartOpened}
             />
-          </Route>
+            <Header onClickCart={() => setCartOpened(true)} />
 
-          
+            <Route path="/" exact>
+              <Home
+                items={items}
+                cartItems={cartItems}
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+                onChangeSearchInput={onChangeSearchInput}
+                onAddToFavorites={onAddToFavorites}
+                onAddToCart={onAddToCart}
+                isLoading={isLoading}
+              />
+            </Route>
 
-          <Route path="/favorites" exact>
-            <Favorites />
-          </Route>
+            <Route path="/favorites" exact>
+              <Favorites />
+            </Route>
 
-          <Route path="/orders" exact>
-            <Orders />
-          </Route>
+            <Route path="/orders" exact>
+              <Orders />
+            </Route>
 
-          <Route path="/guarantees" exact>
-            <Guarantees />
-          </Route>
+            <Route path="/guarantees" exact>
+              <Guarantees />
+            </Route>
 
-          <Route path="/delivery" exact>
-            <Delivery />
-          </Route>
+            <Route path="/delivery" exact>
+              <Delivery />
+            </Route>
 
-          <Route path="/phonePage" exact>
-            <PhonePage/>
-          </Route>
+            <Route path="/phonePage" exact>
+              <PhonePage
+              onAddToCart={onAddToCart}
+              />
+            </Route>
 
-          <Footer />
-        </div>
+            <Route path="/about" exact>
+              <About />
+            </Route>
 
-       
-      </AppContext.Provider>
-    </HashRouter>
-    
+            <Footer />
+          </div>
+        </AppContext.Provider>
+      </HashRouter>
+    </Provider>
   );
 }
 

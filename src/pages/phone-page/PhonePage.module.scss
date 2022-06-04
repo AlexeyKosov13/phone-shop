@@ -1,0 +1,44 @@
+.phone {
+    padding: 50px 70px;
+
+    h2 {
+        margin-bottom: 40px;
+    }
+
+    &__block {
+       display: flex; 
+       justify-content: space-between;
+       align-items: center;
+    }
+
+    &__descr {
+        max-width: 450px;
+
+        p {
+
+            span {
+                color: rgb(54, 51, 51);
+            }
+        }
+    }
+
+    &__price {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-weight: 500;
+        padding: 20px;
+        border-radius: 5px;
+        background-color: rgb(252, 248, 7);
+        
+        button {
+            margin-top: 20px;
+            border: 0;
+            border-radius:5px;
+
+            &:hover {
+                background-color: rgb(255, 252, 96);
+            }
+        }
+    }
+}

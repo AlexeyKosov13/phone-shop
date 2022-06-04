@@ -1,6 +1,8 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCurrentPhone } from "../../redux/phones/reducer";
 import AppContext from "../../context";
 import styles from "./Card.module.scss";
 
@@ -13,7 +15,7 @@ function Card({
   onFavorite,
   favorited = false,
   loading = false,
-  
+  phone
 }) {
   const { isItemAdded } = React.useContext(AppContext);
   const [isFavorite, setIsFavorite] = React.useState(favorited);
@@ -28,8 +30,15 @@ function Card({
     setIsFavorite(!isFavorite);
   };
 
+  const dispatch = useDispatch();
+
+  const handleClick =()=> {
+    console.log(name);
+    dispatch(setCurrentPhone(phone));
+  }
+
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={handleClick}>
       {
         loading ?  <ContentLoader 
         speed={2}

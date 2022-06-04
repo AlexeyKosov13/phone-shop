@@ -20,7 +20,7 @@ function Footer() {
             <Link to='/guarantees'><a href="#">Гарантия</a></Link>
         </div>
         <div className={styles.menu__right}>
-            <a href="#">О компании</a>
+            <Link to='/about'>О компании</Link>
             <a href="#">Как нас найти?</a>
         </div>
       </div>
