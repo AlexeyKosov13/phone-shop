@@ -16,7 +16,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
   const onClickOrder = async () => {
     try {
       setIsLoading(true);
-      const { data } = await axios.post("https://62041896c6d8b20017dc3427.mockapi.io/orders", {
+      const { data } = await axios.post(`${process.env.REACT_APP_BASE}/orders`, {
         items: cartItems,
       });
       
@@ -26,7 +26,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
       
       for (let i = 0; i < cartItems.length; i++){
         const item = cartItems[i];
-        await axios.delete("https://62041896c6d8b20017dc3427.mockapi.io/Cart/" + item.id);
+        await axios.delete(`${process.env.REACT_APP_BASE}/Cart/` + item.id);
         await delay(1000);
       }
 

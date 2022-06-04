@@ -3,7 +3,7 @@ import styles from './PhonePage.module.scss';
 
 function PhonePage() {
   return (
-    <div></div>
+    <div>phonepage</div>
   )
 }
 

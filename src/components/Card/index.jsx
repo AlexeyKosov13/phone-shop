@@ -1,5 +1,6 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
+import { Link } from "react-router-dom";
 import AppContext from "../../context";
 import styles from "./Card.module.scss";
 
@@ -52,8 +53,11 @@ function Card({
             onClick={onClickFavorite}
           />)}
         </div>
-        <img src={imageUrl} alt="phone" width={133} height={142} className={styles.card__image} />
-        <p className={styles.card__name}>{name}</p>
+        <Link to='/phonePage'>
+          <img src={imageUrl} alt="phone" width={133} height={142} className={styles.card__image} />
+          <p className={styles.card__name}>{name}</p>
+        </Link >
+        
         <div className={styles.card__info}>
           <div className={styles.card__price}>
             <span>Цена:</span>
