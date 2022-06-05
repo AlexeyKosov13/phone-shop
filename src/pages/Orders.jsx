@@ -13,7 +13,7 @@ function Orders() {
     (async () => {
       try {
         const { data } = await axios.get(
-          `${process.env.REACT_APP_BASE}/orders`
+          `https://62041896c6d8b20017dc3427.mockapi.io/orders`
         );
         setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []));
         setIsLoading(false);

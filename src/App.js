@@ -17,7 +17,7 @@ import AppContext from "./context";
 import { store } from "./redux";
 
 function App() {
-  console.log(`${process.env.REACT_APP_BASE}/Items`);
+  const base = 'https://62041896c6d8b20017dc3427.mockapi.io';
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
   const [favorites, setFavorites] = React.useState([]);
@@ -30,13 +30,13 @@ function App() {
       try {
         setIsLoading(true);
         const itemsResponse = await axios.get(
-          `${process.env.REACT_APP_BASE}/Items`
+          `${base}/Items`
         );
         const cartResponse = await axios.get(
-          `${process.env.REACT_APP_BASE}/Cart`
+          `${base}/Cart`
         );
         const favoritesResponse = await axios.get(
-          `${process.env.REACT_APP_BASE}/favorites`
+          `${base}/favorites`
         );
         setIsLoading(false);
 
@@ -60,10 +60,10 @@ function App() {
         setCartItems((prev) =>
           prev.filter((item) => Number(item.parentId) !== Number(obj.id))
         );
-        await axios.delete(`${process.env.REACT_APP_BASE}/Cart/${findItem.id}`);
+        await axios.delete(`${base}/Cart/${findItem.id}`);
       } else {
         const { data } = await axios.post(
-          `${process.env.REACT_APP_BASE}/Cart`,
+          `${base}/Cart`,
           obj
         );
         setCartItems((prev) => [...prev, data]);
@@ -76,13 +76,13 @@ function App() {
   const onAddToFavorites = async (obj) => {
     try {
       if (favorites.find((favObj) => Number(favObj.id) === Number(obj.id))) {
-        axios.delete(`${process.env.REACT_APP_BASE}/favorites/${obj.id}`);
+        axios.delete(`${base}/favorites/${obj.id}`);
         setFavorites((prev) =>
           prev.filter((item) => Number(item.id) !== Number(obj.id))
         );
       } else {
         const { data } = await axios.post(
-          `${process.env.REACT_APP_BASE}/favorites`,
+          `${base}/favorites`,
           obj
         );
         setFavorites((prev) => [...prev, data]);
@@ -94,7 +94,7 @@ function App() {
 
   const onRemoveItem = (id) => {
     try {
-      axios.delete(`${process.env.REACT_APP_BASE}/Cart/${id}`);
+      axios.delete(`${base}/Cart/${id}`);
       setCartItems((prev) =>
         prev.filter((item) => Number(item.id) !== Number(id))
       );
