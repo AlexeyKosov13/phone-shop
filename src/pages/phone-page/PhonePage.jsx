@@ -1,15 +1,17 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import  AppContext  from "../../context";
+
 import styles from './PhonePage.module.scss';
 
 function PhonePage() {
+  const {onAddToCart} = React.useContext(AppContext);
 
   const phone = useSelector((state) => state.phone.currentPhone);
 
-const onClickPlus = () => {
-  
-} 
- 
+  const onClickPlus = () => {
+    onAddToCart(phone);
+  };
 
   return (
     <div className={styles.phone}>

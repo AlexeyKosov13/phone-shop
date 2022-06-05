@@ -15,6 +15,7 @@ import Footer from "./components/Footer";
 import About from "./pages/About/About";
 import AppContext from "./context";
 import { store } from "./redux";
+import Place from "./pages/Place/Place";
 
 function App() {
   const base = 'https://62041896c6d8b20017dc3427.mockapi.io';
@@ -39,7 +40,6 @@ function App() {
           `${base}/favorites`
         );
         setIsLoading(false);
-
         setCartItems(cartResponse.data);
         setFavorites(favoritesResponse.data);
         setItems(itemsResponse.data);
@@ -172,6 +172,10 @@ function App() {
 
             <Route path="/about" exact>
               <About />
+            </Route>
+
+            <Route path="/place" exact>
+              <Place />
             </Route>
 
             <Footer />

@@ -33,7 +33,6 @@ function Card({
   const dispatch = useDispatch();
 
   const handleClick =()=> {
-    console.log(name);
     dispatch(setCurrentPhone(phone));
   }
 
