@@ -3,12 +3,12 @@ import ContentLoader from "react-content-loader";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCurrentPhone } from "../../redux/phones/reducer";
-import AppContext from "../../context";
 import styles from "./Card.module.scss";
 
 function Card({
   id,
   imageUrl,
+  parentId,
   name,
   price,
   onPlus,
@@ -17,13 +17,12 @@ function Card({
   loading = false,
   phone
 }) {
-  const { isItemAdded } = React.useContext(AppContext);
+  
   const [isFavorite, setIsFavorite] = React.useState(favorited);
-  const obj = {id, parentId: id, imageUrl, name, price};
+  const obj = {id, parentId, imageUrl, name, price};
 
   const onClickPlus = () => {
     onPlus(obj);
-    console.log(obj);
   };
 
   const onClickFavorite = () => {
@@ -36,6 +35,8 @@ function Card({
   const handleClick =()=> {
     dispatch(setCurrentPhone(phone));
   }
+
+  const componentDidUpdate =() => { window.scrollTo(0, 0) };
 
   return (
     <div className={styles.card} onClick={handleClick}>
@@ -62,7 +63,7 @@ function Card({
             onClick={onClickFavorite}
           />)}
         </div>
-        <Link to='/phonePage'>
+        <Link to='/phonePage' onClick={componentDidUpdate }>
           <img src={imageUrl} alt="phone" width={133} height={142} className={styles.card__image} />
           <p className={styles.card__name}>{name}</p>
         </Link >
@@ -72,12 +73,7 @@ function Card({
             <span>Цена:</span>
             <p>{price} руб.</p>
           </div>
-          {onPlus && (<img
-            className={styles.plus}
-            onClick={onClickPlus}
-            src={isItemAdded(id) ? "img/btn__checked.svg" : "img/btn__plus.svg"}
-            alt="plus"
-          />)}
+          <button className={styles.card__btn} onClick={onClickPlus}>В корзину</button>    
         </div>
       </> 
       }

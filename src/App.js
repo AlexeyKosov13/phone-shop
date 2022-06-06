@@ -13,6 +13,7 @@ import Header from "./components/Header";
 import Drawer from "./components/Drawer/";
 import Footer from "./components/Footer";
 import About from "./pages/About/About";
+import AboutPhone from "./components/AboutPhone";
 import AppContext from "./context";
 import { store } from "./redux";
 import Place from "./pages/Place/Place";
@@ -99,10 +100,6 @@ function App() {
     return cartItems.some((obj) => Number(obj.parentId) === Number(id));
   };
 
-  const isItemsAdded = (id) => {
-    return cartItems.some((obj) => Number(obj.id) === Number(id));
-  };
-
   return (
     <Provider store={store}>
       <HashRouter>
@@ -112,7 +109,6 @@ function App() {
             cartItems,
             favorites,
             isItemAdded,
-            isItemsAdded,
             onAddToCart,
             onAddToFavorites,
             setCartOpened,
@@ -168,6 +164,10 @@ function App() {
             <Route path="/place" exact>
               <Place />
             </Route>
+
+            <Route path="/aboutPhone" exact>
+              <AboutPhone/>
+          </Route>
 
             <Footer />
           </div>

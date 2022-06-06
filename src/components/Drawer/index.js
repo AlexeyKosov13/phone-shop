@@ -44,37 +44,37 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
           <img
             src="img/cart__remove.svg"
             alt="remove"
-            className="btn__remove"
+            className={styles.btn__remove}
             onClick={onClose}
           />
         </h2>
-        <div className="drawer__block">
+        <div className={styles.drawer__block}>
           {items.length > 0 ? (
-            <div className="cart__block">
-              <div className="cart__items">
+            <div className={styles.cart__block}>
+              <div className={styles.cart__items}>
                 {items.map((obj) => (
-                  <div key={obj.id} className="cart__item">
+                  <div key={obj.id} className={styles.cart__item}>
                     <img
-                      className="cart__img"
+                      className={styles.cart__img}
                       src={obj.imageUrl}
-                      alt="Sneakers"
+                      alt="phone"
                       width={70}
                       height={70}
                     />
-                    <div className="cart__info">
+                    <div className={styles.cart__info}>
                       <p>{obj.name}</p>
                       <b>{obj.price}</b>
                     </div>
                     <img
                       src="img/cart__remove.svg"
                       alt="remove"
-                      className="btn__remove"
+                      className={styles.btn__remove}
                       onClick={() => onRemove(obj.id)}
                     />
                   </div>
                 ))}
               </div>
-              <div className="cart__total">
+              <div className={styles.cart__total}>
                 <ul>
                   <li>
                     <span>Итого: </span>
@@ -87,7 +87,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
                     <b>{Math.floor((totalPrice/100)*5)} руб.</b>
                   </li>
                 </ul>
-                <button disabled={isLoading} onClick={onClickOrder} className="green__button">
+                <button disabled={isLoading} onClick={onClickOrder} className={styles.green__button}>
                   Оформить заказ
                   <img src="img/arrow.svg" alt="arrow" />
                 </button>
@@ -95,7 +95,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
             </div>
           ) : (
               <Info title={isOrderComlete ? "Заказ оформлен!" : "Корзина пустая"}
-                description={isOrderComlete ? `ваш заказ №${orderId} скоро будет передан курьерской доставке` : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."}
+                description={isOrderComlete ? `ваш заказ №${orderId} скоро будет передан курьерской доставке` : "Добавьте хотя бы один телефон, чтобы сделать заказ."}
                 image={isOrderComlete? "img/checked.png": "img/basket.png"} />
           )}
         </div>

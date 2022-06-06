@@ -210,14 +210,7 @@ header {
 
 
 
-.drawer__block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
+
 
 .cart__empty {
   align-self: center;
@@ -255,136 +248,38 @@ header {
   height: 150px;
   margin-bottom: 30px;
 }
-.cart__block {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-.cart__items {
-  flex: 1;
-  overflow: auto;
-  margin-bottom: 100px;
-}
-.cart__item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid #f3f3f3;
-  border-radius: 20px;
-  overflow: hidden;
-  min-height: 90px;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.cart__img {
-  margin-right: 15px;
-  align-self: start;
-}
-
-.cart__info {
-  font-size: 16px;
-  line-height: 17px;
-  margin-right: 20px;
-  p {
-    margin-bottom: 5px;
-  }
-  b {
-    font-size: 14px;
-    line-height: 17px;
-  }
-}
-
-.btn__remove {
-  opacity: 0.5;
-  cursor: pointer;
-  transition: opacity 0.2s ease-in-out ;
-  &:hover {
-    opacity: 1;
-  }
-}
-
-.cart__total {
-  font-size: 16px;
-  line-height: 19px;
-  ul {
-    margin-bottom: 30px;
-  }
-  li {
-    display: flex;
-    margin-bottom: 10px;
-    align-items: flex-end;
-  }
-  
-  span {
-    font-size: 16px;
-    line-height: 19px;
-  }
-  div {
-    flex: 1;
-    height: 1px;
-    border-bottom: 1px dashed #DFDFDF;
-    position: relative;
-    top: -4px;
-    margin:  0 7px;
-  }
-  b {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 19px;
-  }
-  .green__button {
-    position: relative;
-    &:disabled {
-      background-color: #bebebe;
-      cursor: default;
-    }
-    &:hover {
-      img {
-        transform: translateX(5px);
-      }
-      
-    }
-    img {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      transition: transform 0.2s ease-in-out;
-    }
-  }
-  
-}
 
 .green__button { 
-    width: 100%;
-    height: 55px;
-    background: #9dd558;
-    border-radius: 18px;
-    border: 0;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s ease-in-out;
-    &:hover { 
-      background: lighten($color: #9dd558, $amount: 20%);
-    }
-    &:active { 
-      background: darken($color: #9dd558, $amount:5%);
-    }
+  width: 100%;
+  height: 55px;
+  background: #9dd558;
+  border-radius: 18px;
+  border: 0;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+
+  &:hover { 
+    background: lighten($color: #9dd558, $amount: 20%);
+  }
+
+  &:active { 
+    background: darken($color: #9dd558, $amount:5%);
+  }
 }
 
-@keyframes button-loading {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-  100% {
-    opacity: 1;
-  }
-}
+
+
+
+
+
+
+
+
+
+
 
 .slider {
   position: relative;
