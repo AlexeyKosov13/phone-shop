@@ -23,6 +23,7 @@ function Card({
 
   const onClickPlus = () => {
     onPlus(obj);
+    console.log(obj);
   };
 
   const onClickFavorite = () => {

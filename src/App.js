@@ -18,7 +18,7 @@ import { store } from "./redux";
 import Place from "./pages/Place/Place";
 
 function App() {
-  const base = 'https://62041896c6d8b20017dc3427.mockapi.io';
+  const base = "https://62041896c6d8b20017dc3427.mockapi.io";
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
   const [favorites, setFavorites] = React.useState([]);
@@ -30,15 +30,9 @@ function App() {
     async function fetchData() {
       try {
         setIsLoading(true);
-        const itemsResponse = await axios.get(
-          `${base}/Items`
-        );
-        const cartResponse = await axios.get(
-          `${base}/Cart`
-        );
-        const favoritesResponse = await axios.get(
-          `${base}/favorites`
-        );
+        const cartResponse = await axios.get(`${base}/Cart`);
+        const favoritesResponse = await axios.get(`${base}/favorites`);
+        const itemsResponse = await axios.get(`${base}/Items`);
         setIsLoading(false);
         setCartItems(cartResponse.data);
         setFavorites(favoritesResponse.data);
@@ -62,10 +56,7 @@ function App() {
         );
         await axios.delete(`${base}/Cart/${findItem.id}`);
       } else {
-        const { data } = await axios.post(
-          `${base}/Cart`,
-          obj
-        );
+        const { data } = await axios.post(`${base}/Cart`, obj);
         setCartItems((prev) => [...prev, data]);
       }
     } catch (error) {
@@ -81,10 +72,7 @@ function App() {
           prev.filter((item) => Number(item.id) !== Number(obj.id))
         );
       } else {
-        const { data } = await axios.post(
-          `${base}/favorites`,
-          obj
-        );
+        const { data } = await axios.post(`${base}/favorites`, obj);
         setFavorites((prev) => [...prev, data]);
       }
     } catch (error) {
@@ -111,6 +99,10 @@ function App() {
     return cartItems.some((obj) => Number(obj.parentId) === Number(id));
   };
 
+  const isItemsAdded = (id) => {
+    return cartItems.some((obj) => Number(obj.id) === Number(id));
+  };
+
   return (
     <Provider store={store}>
       <HashRouter>
@@ -120,6 +112,7 @@ function App() {
             cartItems,
             favorites,
             isItemAdded,
+            isItemsAdded,
             onAddToCart,
             onAddToFavorites,
             setCartOpened,
@@ -165,9 +158,7 @@ function App() {
             </Route>
 
             <Route path="/phonePage" exact>
-              <PhonePage
-              onAddToCart={onAddToCart}
-              />
+              <PhonePage />
             </Route>
 
             <Route path="/about" exact>
