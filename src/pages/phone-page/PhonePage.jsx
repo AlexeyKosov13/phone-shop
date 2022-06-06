@@ -6,11 +6,14 @@ import styles from './PhonePage.module.scss';
 
 function PhonePage() {
   const {onAddToCart} = React.useContext(AppContext);
+  const { isItemAdded } = React.useContext(AppContext);
 
   const phone = useSelector((state) => state.phone.currentPhone);
 
   const onClickPlus = () => {
+    console.log(phone.id);
     onAddToCart(phone);
+    isItemAdded(phone.id);
   };
 
   return (
@@ -30,6 +33,7 @@ function PhonePage() {
         <div className={styles.phone__price}>
           {phone.price} руб.
           <button onClick={onClickPlus}>Купить</button>
+          <span></span>
         </div>
       </div>
     </div>
