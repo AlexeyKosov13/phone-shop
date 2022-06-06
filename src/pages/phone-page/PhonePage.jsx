@@ -4,14 +4,10 @@ import  AppContext  from "../../context";
 
 import styles from './PhonePage.module.scss';
 
-function PhonePage() {
-  const {onAddToCart} = React.useContext(AppContext);
-
+function PhonePage({onPlus}) {
+  const { onAddToCart } = React.useContext(AppContext);
+  const { isItemsAdded } = React.useContext(AppContext);
   const phone = useSelector((state) => state.phone.currentPhone);
-
-  const onClickPlus = () => {
-    onAddToCart(phone);
-  };
 
   return (
     <div className={styles.phone}>
@@ -29,7 +25,8 @@ function PhonePage() {
         </div>
         <div className={styles.phone__price}>
           {phone.price} руб.
-          <button onClick={onClickPlus}>Купить</button>
+          <button onClick={onPlus}>Купить</button>
+          <p>{ isItemsAdded(phone.id)?'в корзине': null}</p>
         </div>
       </div>
     </div>
