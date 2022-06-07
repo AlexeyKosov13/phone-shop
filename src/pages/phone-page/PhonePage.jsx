@@ -1,16 +1,18 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { HashRouter, Route } from "react-router-dom";
 import AboutPhone from "../../components/AboutPhone";
+import Specifications from "../../components/Specifications";
 import AppContext from "../../context";
 
 import styles from "./PhonePage.module.scss";
 
-function PhonePage({ onPlus }) {
+function PhonePage() {
   const { cartItems } = React.useContext(AppContext);
   const { onAddToCart } = React.useContext(AppContext);
   const { isItemAdded } = React.useContext(AppContext);
+  const { aboutOpened, setAboutOpened } = React.useContext(AppContext);
+  const { specificationsOpened, setSpecifiationsOpened } = React.useContext(AppContext);
 
   const phone = useSelector((state) => state.phone.currentPhone);
 
@@ -18,6 +20,20 @@ function PhonePage({ onPlus }) {
     onAddToCart(phone);
     isItemAdded(phone.id);
   };
+
+  const renderAbout = () => {
+    setAboutOpened(!aboutOpened)
+  }
+
+  const sumItem = (phone) => {
+    let total = 0;
+    cartItems.map(item => {
+      if (item.parentId === phone.parentId) {
+        total++;
+      }
+    })
+    return total;
+  }
 
   return (
     <div className={styles.phone}>
@@ -50,7 +66,7 @@ function PhonePage({ onPlus }) {
             <button onClick={onClickPlus}>Купить</button>
             <p>
               {isItemAdded(phone.parentId)
-                ? `в корзине ${cartItems.length}`
+                ? `в корзине ${sumItem(phone)}`
                 : null}
             </p>
           </div>
@@ -58,17 +74,18 @@ function PhonePage({ onPlus }) {
       </div>
       <div className={styles.phone__about}>
         <nav className={styles.phone__nav}>
-          <Link to='/aboutPhone' className={styles.nav__link}>Описание</Link>
-          <Link to='/' className={styles.nav__link}>Характеристики</Link>
+          <p onClick={renderAbout} className={styles.nav__link}>Описание</p>
+          <p onClick={renderAbout} className={styles.nav__link}>Характеристики</p>
+          
           <Link to='/' className={styles.nav__link}>Отзывы</Link>
           <Link to='/' className={styles.nav__link}>Аксессуары</Link>
         </nav>
-        <HashRouter>
-          
-          
-        </HashRouter>
-        
+        <div className={styles.about__block}>
+          <AboutPhone phone={phone} />
+          <Specifications phone={phone}/>
+        </div>
       </div>
+      
     </div>
   );
 }

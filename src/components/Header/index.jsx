@@ -1,15 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {useCart} from "../hooks/useCart";
+import {useCart} from "../../hooks/useCart";
+import ItemsCart from "../ItemsCart";
+import AppContext from "../../context";
+import styles from "./Header.module.scss";
 
-function Header(props) {
-  const {totalPrice } = useCart();
-  
+function Header({onClickCart}) {
+  const { totalPrice } = useCart();
+  const { cartItems } = React.useContext(AppContext);
 
   return (
-    <header>
+    <header className={styles.header}>
       <Link to="/">
-        <div className="header__logo">
+        <div className={styles.header__logo}>
           <img
             src="img/logo.png"
             width={50}
@@ -17,22 +20,23 @@ function Header(props) {
             className="logo__img"
             alt="logo"
           />
-          <div className="header__name">
+          <div className={styles.header__name}>
             <h3>Phone-shop</h3>
             <p>Магазин дешевых телефонов</p>
           </div>
         </div>
       </Link>
 
-    <nav className="header__nav">
-        <Link to="/"><div className="nav__item">Каталог</div></Link>
-        <Link to="/delivery"><div className="nav__item">Доставка</div></Link>
-        <Link to="/guarantees"><div className="nav__item">Гарантии</div></Link>
+    <nav className={styles.header__nav}>
+        <Link to="/"><div className={styles.nav__item}>Каталог</div></Link>
+        <Link to="/delivery"><div className={styles.nav__item}>Доставка</div></Link>
+        <Link to="/guarantees"><div className={styles.nav__item}>Гарантии</div></Link>
        
     </nav>
 
-      <ul className="header__basket">
-        <li onClick={props.onClickCart} className="header__cart">
+      <ul className={styles.header__basket}>
+        <li onClick={onClickCart} className={styles.header__cart}>
+          <ItemsCart quantity = {cartItems.length} />
           <svg
             width="20"
             height="20"
@@ -64,7 +68,7 @@ function Header(props) {
           </svg>
           <span>{totalPrice} руб.</span>
         </li>
-        <li className="header__favorite">
+        <li className={styles.header__favorite}>
           <Link to="/favorites">
             <img src="img/heart.svg" alt="favorite" />
           </Link>

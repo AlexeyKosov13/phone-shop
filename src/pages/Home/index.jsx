@@ -1,7 +1,9 @@
 import React from "react";
-import Card from "../components/Card";
-import { Slider } from "../components/Slider";
-import AppContext from "../context";
+import Card from "../../components/Card";
+import { Slider } from "../../components/Slider";
+import AppContext from "../../context";
+
+import styles from "./Home.module.scss";
 
 function Home({
   items,
@@ -35,19 +37,19 @@ function Home({
   }
 
   return (
-    <div className="content">
-      <Slider />
-      <div className="content__header">
-        <h1>
+    <div className={styles.content}>
+      {/* <Slider /> */}
+      <div className={styles.content__header}>
+        <h2>
           {searchValue ? `Поиск по запросу: "${searchValue}"` : "Все телефоны"}
-        </h1>
-        <div className="content__search">
+        </h2>
+        <div className={styles.content__search}>
           <img src="img/search.svg" alt="search" />
           {searchValue && (
             <img
               src="img/cart__remove.svg"
               alt="clear"
-              className="clear"
+              className={styles.clear}
               onClick={() => setSearchValue("")}
             />
           )}
@@ -60,7 +62,7 @@ function Home({
         </div>
       </div>
 
-      <div className="products">
+      <div className={styles.products}>
         {renderItems()}
       </div>
     </div>

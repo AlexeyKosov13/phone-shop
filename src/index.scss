@@ -44,6 +44,7 @@ body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
+  
 }
 
 /* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
@@ -98,114 +99,8 @@ select {
     margin: 50px auto;  
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 0;
-    align-items: center;
-    margin: 0 30px;
-    border-bottom: 1px solid #EAEAEA;
-    
-}
-.logo__img {
-    margin-right: 15px;
-}
 
-.header__logo {
-    display: flex;
-    align-items: center;
-    h3 {
-        text-transform: uppercase;
-        color: #000;
-    }
-    p {
-        color: #9D9D9D;
-    }
-}
-.header__basket {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    
-    svg {
-       margin-right: 6px;
-    }
-    li {
-        display: flex;
-        align-items: center;
-       // margin-right: 30px;
-    }
-}
 
-.header__nav {
-  display: flex;
-
-  .nav__item {
-    margin-right: 10px;
-    transition: all 0.5s;
-
-    &:hover {
-      opacity: 0.5;
-    }
-  }
-}
-
-.header__cart {
-  margin-right: 30px;
-}
-
-.header__favorite {
-  margin-right: 30px;
-}
-
-.content {
-    padding: 40px;
-    &__favorites {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-    &__header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 40px;
-    }
-    &__search {
-        border-radius: 10px;
-        border: 1px solid #f3f3f3;
-        padding: 0 15px;
-        display: flex;
-        position: relative;
-        input {
-            border: 0;
-            padding: 10px;
-            font-size: 16px;
-            width: 200px;
-        }
-    }
-}
-
-.clear {
-  position: absolute;
-  right: 7px;
-  top: 7px;
-  cursor: pointer;
-}
-
-.products {
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: -20px;
-    margin-left: -20px;
-    justify-content: space-between;
-}
-.favorite {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-}
 
 
 

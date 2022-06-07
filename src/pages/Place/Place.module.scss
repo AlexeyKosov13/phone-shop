@@ -66,3 +66,12 @@
     }
 
 }
+
+@media (max-width: 568px) {
+    .place {
+
+        &__block {
+            flex-direction: column;
+        }
+    }
+}

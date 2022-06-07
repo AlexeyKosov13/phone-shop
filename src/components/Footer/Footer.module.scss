@@ -26,21 +26,21 @@
     &__menu {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-around;
         max-width: 300px;
 
         .menu__left {
             display: flex;
             flex-wrap: wrap;
             flex-direction: column;
-            width: 150px;
+            width: 100px;
         }
 
         .menu__right {
             display: flex;
             flex-wrap: wrap;
             flex-direction: column;
-            width: 150px;
+            width: 100px;
         }
 
         a {
@@ -50,6 +50,30 @@
             &:hover {
                 color: #fff;
             }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        align-items: center;
+
+        &__address {
+            margin-bottom: 30px;
+        }
+
+        &__menu {
+            margin-bottom: 30px;
+        }
+    }
+}
+
+@media (max-width: 360px) {
+    .footer {
+
+        &__map {
+            display: none;
         }
     }
 }

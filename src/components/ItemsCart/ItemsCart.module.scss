@@ -1,0 +1,15 @@
+.itemsInCart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgb(61, 212, 253);
+    border-radius: 15px;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    z-index: 2;
+    left: -7px;
+    top: 11px;
+}

@@ -1,0 +1,14 @@
+.about__overlay { 
+    width: 100%;
+    padding: 50px 70px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out, visibility 0.1s ease-in-out;
+    overflow: hidden;
+   
+  }
+
+.overlayVisible {
+    visibility: visible;
+    opacity: 1;
+}

@@ -4,13 +4,16 @@ import Info from "../Info";
 import { useCart } from "../../hooks/useCart";
 import styles from "./Drawer.module.scss";
 
+
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function Drawer({ onClose, onRemove, items = [], opened }) {
+
   const {cartItems, setCartItems, totalPrice } = useCart();
   const [orderId, setOrderId] = React.useState(null);
   const [isOrderComlete, setIsOrderComlete] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
+
   
 
   const onClickOrder = async () => {
@@ -37,7 +40,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
   }
 
   return (
-    <div className={`${styles.drawer__overlay} ${opened? styles.overlayVisible:''}`}>
+    <div className={`${styles.drawer__overlay}  ${opened ? styles.overlayVisible : ''}   ${opened ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'visible'}`} >
       <div className={styles.drawer}>
         <h2>
           Корзина

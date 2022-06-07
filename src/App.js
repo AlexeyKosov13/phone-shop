@@ -26,6 +26,7 @@ function App() {
   const [searchValue, setSearchValue] = React.useState("");
   const [cartOpened, setCartOpened] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [aboutOpened, setAboutOpened] = React.useState(false);
 
   React.useEffect(() => {
     async function fetchData() {
@@ -113,13 +114,17 @@ function App() {
             onAddToFavorites,
             setCartOpened,
             setCartItems,
+            aboutOpened,
+            setAboutOpened,
           }}
         >
           <div className="wrapper">
             <Drawer
               items={cartItems}
               onRemove={onRemoveItem}
-              onClose={() => setCartOpened(false)}
+              onClose={() => {
+                setCartOpened(false)
+              }}
               opened={cartOpened}
             />
             <Header onClickCart={() => setCartOpened(true)} />
