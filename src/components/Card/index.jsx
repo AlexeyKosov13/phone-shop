@@ -98,10 +98,11 @@ function Card({
             <div className={styles.card__price}>
               <span>Цена:</span>
               <p>{price} руб.</p>
-            </div>
-            <button className={styles.card__btn} onClick={onClickPlus}>
+              </div>
+              {onPlus && (<button className={styles.card__btn} onClick={onClickPlus}>
               В корзину
-            </button>
+            </button>)}
+            
           </div>
           <div className={styles.card__cart}>
             {isItemAdded(phone.parentId)

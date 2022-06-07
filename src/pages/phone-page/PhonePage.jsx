@@ -1,8 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import AboutPhone from "../../components/AboutPhone";
-import Specifications from "../../components/Specifications";
+import Tabs from "../../components/Tabs";
+
 import AppContext from "../../context";
 
 import styles from "./PhonePage.module.scss";
@@ -11,8 +10,6 @@ function PhonePage() {
   const { cartItems } = React.useContext(AppContext);
   const { onAddToCart } = React.useContext(AppContext);
   const { isItemAdded } = React.useContext(AppContext);
-  const { aboutOpened, setAboutOpened } = React.useContext(AppContext);
-  const { specificationsOpened, setSpecifiationsOpened } = React.useContext(AppContext);
 
   const phone = useSelector((state) => state.phone.currentPhone);
 
@@ -20,10 +17,6 @@ function PhonePage() {
     onAddToCart(phone);
     isItemAdded(phone.id);
   };
-
-  const renderAbout = () => {
-    setAboutOpened(!aboutOpened)
-  }
 
   const sumItem = (phone) => {
     let total = 0;
@@ -73,17 +66,7 @@ function PhonePage() {
         </div>
       </div>
       <div className={styles.phone__about}>
-        <nav className={styles.phone__nav}>
-          <p onClick={renderAbout} className={styles.nav__link}>Описание</p>
-          <p onClick={renderAbout} className={styles.nav__link}>Характеристики</p>
-          
-          <Link to='/' className={styles.nav__link}>Отзывы</Link>
-          <Link to='/' className={styles.nav__link}>Аксессуары</Link>
-        </nav>
-        <div className={styles.about__block}>
-          <AboutPhone phone={phone} />
-          <Specifications phone={phone}/>
-        </div>
+        <Tabs phone={phone}/>
       </div>
       
     </div>

@@ -23,6 +23,7 @@ function App() {
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
   const [favorites, setFavorites] = React.useState([]);
+  const [orders, setOrders] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState("");
   const [cartOpened, setCartOpened] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
@@ -35,10 +36,11 @@ function App() {
         const cartResponse = await axios.get(`${base}/Cart`);
         const favoritesResponse = await axios.get(`${base}/favorites`);
         const itemsResponse = await axios.get(`${base}/Items`);
+        
         setIsLoading(false);
         setCartItems(cartResponse.data);
         setFavorites(favoritesResponse.data);
-        setItems(itemsResponse.data);
+        setItems(itemsResponse.data);        
       } catch (error) {
         alert("Ошибка при запросе данных");
       }
@@ -107,6 +109,8 @@ function App() {
         <AppContext.Provider
           value={{
             items,
+            orders,
+            setOrders,
             cartItems,
             favorites,
             isItemAdded,

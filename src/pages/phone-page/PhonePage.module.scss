@@ -9,7 +9,7 @@
        display: flex; 
        justify-content: space-between;
        align-items: center;
-       padding-bottom: 50px;
+       padding-bottom: 30px;
     }
 
     &__descr {
@@ -44,22 +44,9 @@
                 background-color: rgb(255, 236, 129);
             }
         }
-    }
-    
-    &__nav {
-        display: flex;
-        padding: 20px 50px 10px;
-        border-bottom: 1px solid rgb(177, 165, 165);
-    }
+    }  
+   
 }
 
-.nav__link {
-    margin-right: 20px;
-    padding-bottom: 20px;
-    transition: all .5s;
 
-    &:hover {
-        opacity: 0.5;
-    }
-}
 
