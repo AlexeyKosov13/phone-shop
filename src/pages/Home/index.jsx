@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "../../components/Card";
+import Filters from "../../components/Filters";
 import { Slider } from "../../components/Slider";
 import AppContext from "../../context";
 
@@ -43,6 +44,7 @@ function Home({
         <h2>
           {searchValue ? `Поиск по запросу: "${searchValue}"` : "Все телефоны"}
         </h2>
+        <Filters/>
         <div className={styles.content__search}>
           <img src="img/search.svg" alt="search" />
           {searchValue && (

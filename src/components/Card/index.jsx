@@ -8,6 +8,7 @@ import styles from "./Card.module.scss";
 
 function Card({
   id,
+  raiting,
   imageUrl,
   parentId,
   name,
@@ -21,7 +22,7 @@ function Card({
   const [isFavorite, setIsFavorite] = React.useState(favorited);
   const { isItemAdded } = React.useContext(AppContext);
   const { cartItems } = React.useContext(AppContext);
-  const obj = { id, parentId, imageUrl, name, price };
+  const obj = { id, parentId, imageUrl, name, price, raiting };
 
   const onClickPlus = () => {
     onPlus(obj);
@@ -42,16 +43,16 @@ function Card({
     window.scrollTo(0, 0);
   };
 
-    const sumItem = (phone) => {
+  const sumItem = (phone) => {
     console.log(phone);
     let total = 0;
-    cartItems.map(item => {
+    cartItems.map((item) => {
       if (item.parentId === phone.parentId) {
         total++;
       }
-    })
+    });
     return total;
-  }
+  };
 
   return (
     <div className={styles.card} onClick={handleClick}>
@@ -72,17 +73,25 @@ function Card({
         </ContentLoader>
       ) : (
         <>
-          <div className={styles.favorite}>
-            {onFavorite && (
-              <img
-                src={
-                  isFavorite ? "img/heart__liked.svg" : "img/heart__unliked.svg"
-                }
-                alt="favorite"
-                onClick={onClickFavorite}
-              />
-            )}
+          <div className={styles.head__block}>
+            <div className={styles.favorite}>
+              {onFavorite && (
+                <img
+                  src={
+                    isFavorite
+                      ? "img/heart__liked.svg"
+                      : "img/heart__unliked.svg"
+                  }
+                  alt="favorite"
+                  onClick={onClickFavorite}
+                />
+              )}
+            </div>
+              <div className={styles.raiting}>
+                <img src="img/star.svg" alt="star" />
+                {raiting}</div>
           </div>
+
           <Link to="/phonePage" onClick={componentDidUpdate}>
             <img
               src={imageUrl}
@@ -98,16 +107,15 @@ function Card({
             <div className={styles.card__price}>
               <span>Цена:</span>
               <p>{price} руб.</p>
-              </div>
-              {onPlus && (<button className={styles.card__btn} onClick={onClickPlus}>
-              В корзину
-            </button>)}
-            
+            </div>
+            {onPlus && (
+              <button className={styles.card__btn} onClick={onClickPlus}>
+                В корзину
+              </button>
+            )}
           </div>
           <div className={styles.card__cart}>
-            {isItemAdded(phone.parentId)
-              ? `в корзине ${sumItem(phone)}`
-              : null}
+            {isItemAdded(phone.parentId) ? `в корзине ${sumItem(phone)}` : null}
           </div>
         </>
       )}

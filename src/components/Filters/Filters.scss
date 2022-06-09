@@ -1,0 +1,21 @@
+.filters {
+    display: flex;
+    font-size: 12px;
+
+    &__item {
+        margin-left: 5px;
+        margin-right: 5px;
+        transition: all .5s;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.5;
+            border-bottom: 1px dashed #000;
+        }
+    }
+
+    &__active {
+        color: red;
+    }
+}
+

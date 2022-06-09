@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Tabs from "../../components/Tabs";
-
 import AppContext from "../../context";
 
 import styles from "./PhonePage.module.scss";
@@ -37,6 +36,9 @@ function PhonePage() {
             <img src={phone.imageUrl} alt={phone.name} />
           </div>
           <div className={styles.phone__descr}>
+            <div className={styles.raiting}>
+            <img src="img/star.svg" alt="star" />
+              {phone.raiting}</div>
             <p>
               <span>Тип экрана:</span> {phone.display}
             </p>

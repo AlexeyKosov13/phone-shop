@@ -16,6 +16,25 @@
       transform: translateY(-3px);
 
     }
+
+    .head__block {
+        display: flex;
+        justify-content: space-between;
+        padding-right: 10px;
+    }
+
+    .raiting {
+        display: flex;
+        font-size: 14px;
+        color: #BDBDBD;
+
+        img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+    }
+
     .favorite {
         margin-bottom: 5px;
     }
@@ -33,7 +52,7 @@
     }
 
     &__image {
-        align-self: center;
+        margin: 0 auto;
     }
 
     &__btn {
@@ -57,6 +76,10 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+
+    &__name {
+        min-height: 50px;
     }
 
     &__price {

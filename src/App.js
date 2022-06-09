@@ -29,6 +29,9 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [aboutOpened, setAboutOpened] = React.useState(false);
 
+  const [filterPrice, setFilterPrice] = React.useState(1);
+    const [filterRaiting, setFilterRaiting] = React.useState(0);
+
   React.useEffect(() => {
     async function fetchData() {
       try {
@@ -36,7 +39,6 @@ function App() {
         const cartResponse = await axios.get(`${base}/Cart`);
         const favoritesResponse = await axios.get(`${base}/favorites`);
         const itemsResponse = await axios.get(`${base}/Items`);
-        
         setIsLoading(false);
         setCartItems(cartResponse.data);
         setFavorites(favoritesResponse.data);
@@ -103,6 +105,7 @@ function App() {
     return cartItems.some((obj) => Number(obj.parentId) === Number(id));
   };
 
+
   return (
     <Provider store={store}>
       <HashRouter>
@@ -110,6 +113,11 @@ function App() {
           value={{
             items,
             orders,
+            filterPrice,
+            setFilterPrice,
+            filterRaiting,
+            setFilterRaiting,
+            setItems,
             setOrders,
             cartItems,
             favorites,
