@@ -28,9 +28,10 @@ function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
   const [aboutOpened, setAboutOpened] = React.useState(false);
-
   const [filterPrice, setFilterPrice] = React.useState(1);
-    const [filterRaiting, setFilterRaiting] = React.useState(0);
+  const [filterRaiting, setFilterRaiting] = React.useState(0);
+  
+
 
   React.useEffect(() => {
     async function fetchData() {
@@ -42,7 +43,7 @@ function App() {
         setIsLoading(false);
         setCartItems(cartResponse.data);
         setFavorites(favoritesResponse.data);
-        setItems(itemsResponse.data);        
+        setItems(itemsResponse.data);
       } catch (error) {
         alert("Ошибка при запросе данных");
       }
@@ -105,6 +106,22 @@ function App() {
     return cartItems.some((obj) => Number(obj.parentId) === Number(id));
   };
 
+  function getFilterPriceUp () {
+    setFilterPrice(1);
+    setFilterRaiting(0);
+     let res = items.sort((a, b) => a.price-b.price);
+    setItems(res);
+    console.log(res);
+ }
+
+ function getFilterRaitingUp () {
+     setFilterPrice(0);
+     setFilterRaiting(1);
+     let res = items.sort((a, b) => a.raiting-b.raiting);
+     setItems(res);
+     console.log(res);
+  }
+
 
   return (
     <Provider store={store}>
@@ -128,6 +145,8 @@ function App() {
             setCartItems,
             aboutOpened,
             setAboutOpened,
+            getFilterPriceUp,
+            getFilterRaitingUp,
           }}
         >
           <div className="wrapper">

@@ -18,7 +18,11 @@ function Home({
 
   const { isItemAdded } = React.useContext(AppContext);
 
+  const { getFilterPriceUp } = React.useContext(AppContext);
+    const { getFilterRaitingUp} = React.useContext(AppContext);
+
   const renderItems = () => {
+    getFilterRaitingUp(); 
     const filteredItems = items.filter((item) =>
       item.name.toLowerCase().includes(searchValue.toLowerCase())
     );
