@@ -106,23 +106,6 @@ function App() {
     return cartItems.some((obj) => Number(obj.parentId) === Number(id));
   };
 
-  function getFilterPriceUp () {
-    setFilterPrice(1);
-    setFilterRaiting(0);
-     let res = items.sort((a, b) => a.price-b.price);
-    setItems(res);
-    console.log(res);
- }
-
- function getFilterRaitingUp () {
-     setFilterPrice(0);
-     setFilterRaiting(1);
-     let res = items.sort((a, b) => a.raiting-b.raiting);
-     setItems(res);
-     console.log(res);
-  }
-
-
   return (
     <Provider store={store}>
       <HashRouter>
@@ -145,8 +128,6 @@ function App() {
             setCartItems,
             aboutOpened,
             setAboutOpened,
-            getFilterPriceUp,
-            getFilterRaitingUp,
           }}
         >
           <div className="wrapper">
@@ -163,6 +144,7 @@ function App() {
             <Route path="/" exact>
               <Home
                 items={items}
+                isItemAdded={isItemAdded}
                 cartItems={cartItems}
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}

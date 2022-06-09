@@ -14,32 +14,25 @@ function Home({
   onAddToCart,
   onAddToFavorites,
   isLoading,
+  isItemAdded,
 }) {
-
-  const { isItemAdded } = React.useContext(AppContext);
-
-  const { getFilterPriceUp } = React.useContext(AppContext);
-    const { getFilterRaitingUp} = React.useContext(AppContext);
-
   const renderItems = () => {
-    getFilterRaitingUp(); 
     const filteredItems = items.filter((item) =>
       item.name.toLowerCase().includes(searchValue.toLowerCase())
     );
-    return ( (isLoading ? [...Array(8)]: filteredItems)  
-          .map((item, index) => (
-            <Card
-              phone = {item}
-              key={index}
-              onFavorite={(obj) => onAddToFavorites(obj)}
-              onPlus={(obj) => onAddToCart(obj)}
-              added={isItemAdded(item && item.id)}
-              {...item}
-              loading={isLoading}
-            />
-          ))
-    )
-  }
+
+    return (isLoading ? [...Array(8)] : filteredItems).map((item, index) => (
+      <Card
+        phone={item}
+        key={index}
+        onFavorite={(obj) => onAddToFavorites(obj)}
+        onPlus={(obj) => onAddToCart(obj)}
+        added={isItemAdded(item && item.id)}
+        {...item}
+        loading={isLoading}
+      />
+    ));
+  };
 
   return (
     <div className={styles.content}>
@@ -48,7 +41,7 @@ function Home({
         <h2>
           {searchValue ? `Поиск по запросу: "${searchValue}"` : "Все телефоны"}
         </h2>
-        <Filters/>
+        <Filters />
         <div className={styles.content__search}>
           <img src="img/search.svg" alt="search" />
           {searchValue && (
@@ -68,9 +61,7 @@ function Home({
         </div>
       </div>
 
-      <div className={styles.products}>
-        {renderItems()}
-      </div>
+      <div className={styles.products}>{renderItems()}</div>
     </div>
   );
 }

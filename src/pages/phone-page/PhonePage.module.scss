@@ -53,8 +53,31 @@
                 background-color: rgb(255, 236, 129);
             }
         }
-    }  
+    } 
+    
+    &__about {
+        overflow: hidden;
+    }
    
+}
+
+@media (max-width: 568px) {
+    .phone {
+
+        &__block {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &__img {
+            margin-bottom: 20px;
+        }
+
+        &__descr {
+            margin-bottom: 20px;
+        }
+    }
 }
 
 
