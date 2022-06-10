@@ -58,6 +58,22 @@
     .products {
         justify-content: space-around;
     }
+
+    .content {
+
+        &__header {
+            flex-direction: column;
+
+            h2 {
+                margin-bottom: 10px;
+            }
+        }
+
+        &__search {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+    }
 }
 
 @media (max-width:568px) {

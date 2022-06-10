@@ -44,7 +44,6 @@ function Card({
   };
 
   const sumItem = (phone) => {
-    console.log(phone);
     let total = 0;
     cartItems.map((item) => {
       if (item.parentId === phone.parentId) {

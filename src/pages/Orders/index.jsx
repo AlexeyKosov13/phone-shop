@@ -7,8 +7,6 @@ import styles from './Orders.module.scss';
 
 function Orders() {
   const { orders, setOrders } = React.useContext(AppContext);
-  const { onAddToFavorites } = React.useContext(AppContext);
-  const { onAddToCart } = React.useContext(AppContext);
   const { isItemAdded } = React.useContext(AppContext);
   const { isLoading, setIsLoading } = React.useContext(AppContext);
   

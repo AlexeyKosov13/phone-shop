@@ -28,10 +28,7 @@ function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
   const [aboutOpened, setAboutOpened] = React.useState(false);
-  const [filterPrice, setFilterPrice] = React.useState(1);
-  const [filterRaiting, setFilterRaiting] = React.useState(0);
-  
-
+  const [filters, setFilter] = React.useState();
 
   React.useEffect(() => {
     async function fetchData() {
@@ -113,21 +110,23 @@ function App() {
           value={{
             items,
             orders,
-            filterPrice,
-            setFilterPrice,
-            filterRaiting,
-            setFilterRaiting,
+            filters,
+            setFilter,
             setItems,
             setOrders,
             cartItems,
             favorites,
             isItemAdded,
             onAddToCart,
+            searchValue,
+            setSearchValue,
             onAddToFavorites,
             setCartOpened,
             setCartItems,
             aboutOpened,
             setAboutOpened,
+            isLoading,
+            onChangeSearchInput,
           }}
         >
           <div className="wrapper">
@@ -135,24 +134,15 @@ function App() {
               items={cartItems}
               onRemove={onRemoveItem}
               onClose={() => {
-                setCartOpened(false)
+                setCartOpened(false);
               }}
               opened={cartOpened}
             />
+
             <Header onClickCart={() => setCartOpened(true)} />
 
             <Route path="/" exact>
-              <Home
-                items={items}
-                isItemAdded={isItemAdded}
-                cartItems={cartItems}
-                searchValue={searchValue}
-                setSearchValue={setSearchValue}
-                onChangeSearchInput={onChangeSearchInput}
-                onAddToFavorites={onAddToFavorites}
-                onAddToCart={onAddToCart}
-                isLoading={isLoading}
-              />
+              <Home />
             </Route>
 
             <Route path="/favorites" exact>
@@ -184,8 +174,8 @@ function App() {
             </Route>
 
             <Route path="/aboutPhone" exact>
-              <AboutPhone/>
-          </Route>
+              <AboutPhone />
+            </Route>
 
             <Footer />
           </div>

@@ -6,16 +6,16 @@ import AppContext from "../../context";
 
 import styles from "./Home.module.scss";
 
-function Home({
-  items,
-  searchValue,
-  setSearchValue,
-  onChangeSearchInput,
-  onAddToCart,
-  onAddToFavorites,
-  isLoading,
-  isItemAdded,
-}) {
+function Home() {
+
+  const { items } = React.useContext(AppContext);
+  const { isItemAdded } = React.useContext(AppContext);
+  const { searchValue, setSearchValue } = React.useContext(AppContext);
+  const { onAddToCart } = React.useContext(AppContext);
+  const { isLoading } = React.useContext(AppContext);
+  const { onAddToFavorites } = React.useContext(AppContext);
+  const { onChangeSearchInput } = React.useContext(AppContext);
+
   const renderItems = () => {
     const filteredItems = items.filter((item) =>
       item.name.toLowerCase().includes(searchValue.toLowerCase())

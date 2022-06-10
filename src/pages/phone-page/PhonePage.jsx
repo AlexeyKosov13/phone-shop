@@ -9,6 +9,7 @@ function PhonePage() {
   const { cartItems } = React.useContext(AppContext);
   const { onAddToCart } = React.useContext(AppContext);
   const { isItemAdded } = React.useContext(AppContext);
+  const { favorites } = React.useContext(AppContext);
 
   const phone = useSelector((state) => state.phone.currentPhone);
 
@@ -19,26 +20,44 @@ function PhonePage() {
 
   const sumItem = (phone) => {
     let total = 0;
-    cartItems.map(item => {
+    cartItems.map((item) => {
       if (item.parentId === phone.parentId) {
         total++;
       }
-    })
+    });
     return total;
-  }
+  };
 
   return (
     <div className={styles.phone}>
       <div className={styles.block}>
-        <h2 className={styles.phone__title}>{phone.name}</h2>
+        <div className="phone__blockTitle">
+          <h2 className={styles.phone__title}>{phone.name}</h2>
+          {/* <div className={styles.phone__favorite}>
+              {onFavorite && (
+                <img
+                  src={
+                    isFavorite
+                      ? "img/heart__liked.svg"
+                      : "img/heart__unliked.svg"
+                  }
+                  alt="favorite"
+                  onClick={onClickFavorite}
+                />
+              )}
+            </div> */}
+        </div>
+        
+
         <div className={styles.phone__block}>
           <div className={styles.phone__img}>
             <img src={phone.imageUrl} alt={phone.name} />
           </div>
           <div className={styles.phone__descr}>
             <div className={styles.raiting}>
-            <img src="img/star.svg" alt="star" />
-              {phone.raiting}</div>
+              <img src="img/star.svg" alt="star" />
+              {phone.raiting}
+            </div>
             <p>
               <span>Тип экрана:</span> {phone.display}
             </p>
@@ -68,9 +87,8 @@ function PhonePage() {
         </div>
       </div>
       <div className={styles.phone__about}>
-        <Tabs phone={phone}/>
+        <Tabs phone={phone} />
       </div>
-      
     </div>
   );
 }
