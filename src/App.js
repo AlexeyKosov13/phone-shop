@@ -28,7 +28,7 @@ function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
   const [aboutOpened, setAboutOpened] = React.useState(false);
-  const [filters, setFilter] = React.useState();
+  const [filters, setFilter] = React.useState(0);
 
   React.useEffect(() => {
     async function fetchData() {

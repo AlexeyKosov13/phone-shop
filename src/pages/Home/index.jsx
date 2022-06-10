@@ -41,7 +41,7 @@ function Home() {
         <h2>
           {searchValue ? `Поиск по запросу: "${searchValue}"` : "Все телефоны"}
         </h2>
-        <Filters />
+        <Filters  />
         <div className={styles.content__search}>
           <img src="img/search.svg" alt="search" />
           {searchValue && (

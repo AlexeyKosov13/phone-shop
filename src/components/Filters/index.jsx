@@ -3,7 +3,7 @@ import AppContext from '../../context';
 import './Filters.scss';
 
 function Filters() {
-    const { items } = React.useContext(AppContext);
+    const { items, setItems } = React.useContext(AppContext);
     const { filters, setFilter } = React.useContext(AppContext);
 
     function filter(event) {
