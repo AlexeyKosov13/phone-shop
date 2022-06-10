@@ -99,6 +99,37 @@ function App() {
     setSearchValue(event.target.value);
   };
 
+  const addFilter = (event) => {
+    setFilter(event.target.value);
+  };
+
+  const onChangeFilter = () => {
+    let res;
+
+        switch (filters) {
+            case "priceUp":
+                res = items.sort((a, b) => a.price - b.price);
+                setFilter(res);
+              break;
+            case "priceDown":
+                res = items.sort((a, b) => b.price - a.price);
+                setFilter(res);
+              break;
+            case "raitingUp":
+               res = items.sort((a, b) => a.raiting-b.raiting);
+                setFilter(res);
+            break;
+            case "raitingDown":
+              res = items.sort((a, b) => b.raiting-a.raiting);
+               setFilter(res);
+             break;
+            default:
+              res = items.sort((a, b) => a.price - b.price);
+              setFilter(res);
+            break;
+        }
+  };
+
   const isItemAdded = (id) => {
     return cartItems.some((obj) => Number(obj.parentId) === Number(id));
   };
@@ -127,6 +158,8 @@ function App() {
             setAboutOpened,
             isLoading,
             onChangeSearchInput,
+            onChangeFilter,
+            addFilter,
           }}
         >
           <div className="wrapper">
