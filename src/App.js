@@ -29,6 +29,8 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [aboutOpened, setAboutOpened] = React.useState(false);
   const [filters, setFilter] = React.useState(0);
+  const [phones, setPhones] = React.useState([]);
+
 
   React.useEffect(() => {
     async function fetchData() {
@@ -62,6 +64,7 @@ function App() {
       } else {
         const { data } = await axios.post(`${base}/Cart`, obj);
         setCartItems((prev) => [...prev, data]);
+        console.log(cartItems);
       }
     } catch (error) {
       alert("Ошибка при добавлении в корзину");
@@ -70,7 +73,8 @@ function App() {
 
   const onAddToFavorites = async (obj) => {
     try {
-      if (favorites.find((favObj) => Number(favObj.id) === Number(obj.id))) {
+      if (favorites.find((favObj) => Number(favObj.parentId) === Number(obj.parentId))) 
+      {
         axios.delete(`${base}/favorites/${obj.id}`);
         setFavorites((prev) =>
           prev.filter((item) => Number(item.id) !== Number(obj.id))
@@ -78,6 +82,7 @@ function App() {
       } else {
         const { data } = await axios.post(`${base}/favorites`, obj);
         setFavorites((prev) => [...prev, data]);
+        console.log(favorites);
       }
     } catch (error) {
       alert("Не удалось добавить");
@@ -101,34 +106,40 @@ function App() {
 
   const addFilter = (event) => {
     setFilter(event.target.value);
+    onChangeFilter();
   };
 
   const onChangeFilter = () => {
     let res;
-
         switch (filters) {
             case "priceUp":
                 res = items.sort((a, b) => a.price - b.price);
-                setFilter(res);
+                setItems(res);
               break;
             case "priceDown":
                 res = items.sort((a, b) => b.price - a.price);
-                setFilter(res);
+                setItems(res);
               break;
             case "raitingUp":
                res = items.sort((a, b) => a.raiting-b.raiting);
-                setFilter(res);
+                setItems(res);
             break;
             case "raitingDown":
               res = items.sort((a, b) => b.raiting-a.raiting);
-               setFilter(res);
+               setItems(res);
              break;
             default:
               res = items.sort((a, b) => a.price - b.price);
-              setFilter(res);
+              setItems(res);
             break;
         }
   };
+  
+
+  const isFavoritAdded = (id) => {
+    return favorites.some((obj) => Number(obj.parentId) === Number(id));
+  };
+
 
   const isItemAdded = (id) => {
     return cartItems.some((obj) => Number(obj.parentId) === Number(id));
@@ -147,7 +158,9 @@ function App() {
             setOrders,
             cartItems,
             favorites,
+            setFavorites,
             isItemAdded,
+            isFavoritAdded,
             onAddToCart,
             searchValue,
             setSearchValue,

@@ -22,7 +22,6 @@ function Favorites() {
                 phone={item}
                 key={index}
                 favorited={true}
-                onFavorite={onAddToFavorites}
                 {...item}
               />
             ))}

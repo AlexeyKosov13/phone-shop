@@ -1,7 +1,6 @@
 import React from "react";
 import Card from "../../components/Card";
 import Filters from "../../components/Filters";
-import { Slider } from "../../components/Slider";
 import AppContext from "../../context";
 
 import styles from "./Home.module.scss";
@@ -10,10 +9,10 @@ function Home() {
 
   const { items } = React.useContext(AppContext);
   const { isItemAdded } = React.useContext(AppContext);
+  const { isFavoritAdded } = React.useContext(AppContext);
   const { searchValue, setSearchValue } = React.useContext(AppContext);
   const { onAddToCart } = React.useContext(AppContext);
   const { isLoading } = React.useContext(AppContext);
-  const { onAddToFavorites } = React.useContext(AppContext);
   const { onChangeSearchInput } = React.useContext(AppContext);
 
   const renderItems = () => {
@@ -25,9 +24,9 @@ function Home() {
       <Card
         phone={item}
         key={index}
-        onFavorite={(obj) => onAddToFavorites(obj)}
         onPlus={(obj) => onAddToCart(obj)}
         added={isItemAdded(item && item.id)}
+        addedFavorite={isFavoritAdded(item&&item.id)}
         {...item}
         loading={isLoading}
       />

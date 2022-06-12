@@ -1,51 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef } from 'react';
+import Swiper from 'react-id-swiper';
+import AppContext from '../../context';
 
-const img = [
-  <img key={1} src='img/promo/1.jpg' />,
-  <img key={2} src='img/promo/2.jpg' />,
-  <img key={3} src='img/promo/3.jpg' />,
-  <img key={4} src='img/promo/4.jpg' />,
-  <img key={5} src='img/promo/5.jpg' />,
-];
+const Slider = ({src}) => {
 
-export function Slider() {
-  // Индекс текущего слайда
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  // Хук Effect
-  useEffect(() => {
-    // Запускаем интервал
-    const interval = setInterval(() => {
-      // Меняем состояние
-      setActiveIndex((current) => {
-        // Вычисляем индекс следующего слайда, который должен вывестись
-        const res = current === img.length - 1 ? 0 : current + 1;
-        // Возвращаем индекс
-        return res;
-      });
-    }, 3000);
-    // Выключаем интервал
-    return () => clearInterval();
-  }, []);
-
-  // Вычисляем индекс предыдущего слайда
-  const prevImgIndex = activeIndex ? activeIndex - 1 : img.length - 1;
-  // Вычисляем индекс следующего слайда
-  const nextImgIndex = activeIndex === img.length - 1 ? 0 : activeIndex + 1;
-
+  const params = {
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+      clickable: true
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
+    spaceBetween: 30
+  }
   return (
-    <div className="slider">
-      <div className="slider-img slider-img-prev" key={prevImgIndex}>
-        {img[prevImgIndex]}
-      </div>
-      <div className="slider-img" key={activeIndex}>
-        {img[activeIndex]}
-      </div>
-      <div className="slider-img slider-img-next" key={nextImgIndex}>
-        {img[nextImgIndex]}
-      </div>
+    <div>
+      <Swiper {...params}>
+        <div><img src={src} alt="photoPhone"/></div>
+      
+        <div><img src={src} alt="photoPhone"/></div>
+        <div><img src={src} alt="photoPhone"/></div>
+        <div><img src={src} alt="photoPhone"/></div>
+        <div><img src={src} alt="photoPhone"/></div>
+      </Swiper>
     </div>
   );
-}
+};
 
 export default Slider;

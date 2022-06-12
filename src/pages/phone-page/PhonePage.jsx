@@ -7,15 +7,21 @@ import styles from "./PhonePage.module.scss";
 
 function PhonePage() {
   const { cartItems } = React.useContext(AppContext);
+  const { onAddToFavorites } = React.useContext(AppContext);
+  const { isFavoritAdded } = React.useContext(AppContext);
   const { onAddToCart } = React.useContext(AppContext);
   const { isItemAdded } = React.useContext(AppContext);
-  const { favorites } = React.useContext(AppContext);
+  const { isFavorite, setIsFavorite} = React.useContext(AppContext);
 
   const phone = useSelector((state) => state.phone.currentPhone);
 
   const onClickPlus = () => {
     onAddToCart(phone);
     isItemAdded(phone.id);
+  };
+
+  const onClickFavorite = () => {
+    onAddToFavorites(phone);
   };
 
   const sumItem = (phone) => {
@@ -33,19 +39,13 @@ function PhonePage() {
       <div className={styles.block}>
         <div className="phone__blockTitle">
           <h2 className={styles.phone__title}>{phone.name}</h2>
-          {/* <div className={styles.phone__favorite}>
-              {onFavorite && (
-                <img
-                  src={
-                    isFavorite
-                      ? "img/heart__liked.svg"
-                      : "img/heart__unliked.svg"
-                  }
+          <div className={styles.phone__favorite}>
+          <img src={isFavoritAdded(phone.parentId)? "img/heart__liked.svg"
+                      : "img/heart__unliked.svg"}
                   alt="favorite"
                   onClick={onClickFavorite}
                 />
-              )}
-            </div> */}
+            </div>
         </div>
         
 

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import AppContext from "../../context";
 import { setCurrentPhone } from "../../redux/phones/reducer";
+import Slider from "../Slider/";
 import styles from "./Card.module.scss";
 
 function Card({
@@ -21,15 +22,18 @@ function Card({
 }) {
   const [isFavorite, setIsFavorite] = React.useState(favorited);
   const { isItemAdded } = React.useContext(AppContext);
+  const { isFavoritAdded } = React.useContext(AppContext);
   const { cartItems } = React.useContext(AppContext);
-  const obj = { id, parentId, imageUrl, name, price, raiting };
+  const { favorites, onAddToFavorites } = React.useContext(AppContext);
+ 
 
   const onClickPlus = () => {
-    onPlus(obj);
+    onPlus(phone);
   };
 
   const onClickFavorite = () => {
-    onFavorite(obj);
+   
+    onAddToFavorites(phone);
     setIsFavorite(!isFavorite);
   };
 
@@ -74,7 +78,7 @@ function Card({
         <>
           <div className={styles.head__block}>
             <div className={styles.favorite}>
-              {onFavorite && (
+              {/* {onFavorite && (
                 <img
                   src={
                     isFavorite
@@ -84,21 +88,28 @@ function Card({
                   alt="favorite"
                   onClick={onClickFavorite}
                 />
-              )}
+              )} */}
+              <img src={isFavoritAdded(phone.parentId)? "img/heart__liked.svg"
+                      : "img/heart__unliked.svg"}
+                  alt="favorite"
+                  onClick={onClickFavorite}
+                />
             </div>
-              <div className={styles.raiting}>
-                <img src="img/star.svg" alt="star" />
-                {raiting}</div>
+            <div className={styles.raiting}>
+              <img src="img/star.svg" alt="star" />
+              {raiting}
+            </div>
           </div>
 
+          {/* <Slider src={imageUrl}/> */}
+          <img
+            src={imageUrl}
+            alt="phone"
+            width={133}
+            height={142}
+            className={styles.card__image}
+          />
           <Link to="/phonePage" onClick={componentDidUpdate}>
-            <img
-              src={imageUrl}
-              alt="phone"
-              width={133}
-              height={142}
-              className={styles.card__image}
-            />
             <p className={styles.card__name}>{name}</p>
           </Link>
 

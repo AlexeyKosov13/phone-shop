@@ -6,11 +6,8 @@ function Filters() {
     const { onChangeFilter } = React.useContext(AppContext);
     const {addFilter } = React.useContext(AppContext);
 
-  onChangeFilter();
-    // function filter(event) {
-    //     setFilter(event.target.value);
-        
-    // }
+  
+ 
 
   return (
       <div className="filters">
