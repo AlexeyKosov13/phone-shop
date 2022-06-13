@@ -24,15 +24,7 @@ function PhonePage() {
     onAddToFavorites(phone);
   };
 
-  const sumItem = (phone) => {
-    let total = 0;
-    cartItems.map((item) => {
-      if (item.parentId === phone.parentId) {
-        total++;
-      }
-    });
-    return total;
-  };
+  
 
   return (
     <div className={styles.phone}>
@@ -77,12 +69,15 @@ function PhonePage() {
           </div>
           <div className={styles.phone__price}>
             {phone.price} руб.
-            <button onClick={onClickPlus}>Купить</button>
-            <p>
-              {isItemAdded(phone.parentId)
-                ? `в корзине ${sumItem(phone)}`
-                : null}
-            </p>
+            {/* {onPlus && (
+                <img
+                className={styles.plus}
+                  onClick={onClickPlus}
+                  src={isItemAdded(obj.parentId) ? 'img/btn__checked.svg' : 'img/btn__plus.svg'}
+                  alt='plus'
+              />
+            )} */}
+            
           </div>
         </div>
       </div>

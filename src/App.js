@@ -29,7 +29,7 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [aboutOpened, setAboutOpened] = React.useState(false);
   const [filters, setFilter] = React.useState(0);
-  const [phones, setPhones] = React.useState([]);
+  
 
 
   React.useEffect(() => {
@@ -72,8 +72,9 @@ function App() {
   };
 
   const onAddToFavorites = async (obj) => {
+    console.log(obj)
     try {
-      if (favorites.find((favObj) => Number(favObj.parentId) === Number(obj.parentId))) 
+      if (favorites.find((favObj) => Number(favObj.parentId) === Number(obj.id))) 
       {
         axios.delete(`${base}/favorites/${obj.id}`);
         setFavorites((prev) =>
@@ -82,7 +83,6 @@ function App() {
       } else {
         const { data } = await axios.post(`${base}/favorites`, obj);
         setFavorites((prev) => [...prev, data]);
-        console.log(favorites);
       }
     } catch (error) {
       alert("Не удалось добавить");

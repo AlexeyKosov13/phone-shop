@@ -8,10 +8,7 @@ import styles from "./Home.module.scss";
 function Home() {
 
   const { items } = React.useContext(AppContext);
-  const { isItemAdded } = React.useContext(AppContext);
-  const { isFavoritAdded } = React.useContext(AppContext);
   const { searchValue, setSearchValue } = React.useContext(AppContext);
-  const { onAddToCart } = React.useContext(AppContext);
   const { isLoading } = React.useContext(AppContext);
   const { onChangeSearchInput } = React.useContext(AppContext);
 
@@ -24,9 +21,6 @@ function Home() {
       <Card
         phone={item}
         key={index}
-        onPlus={(obj) => onAddToCart(obj)}
-        added={isItemAdded(item && item.id)}
-        addedFavorite={isFavoritAdded(item&&item.id)}
         {...item}
         loading={isLoading}
       />

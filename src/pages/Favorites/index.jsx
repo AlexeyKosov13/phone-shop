@@ -5,7 +5,8 @@ import AppContext from "../../context";
 import styles from "./Favorites.module.scss";
 
 function Favorites() {
-  const {favorites, onAddToFavorites} = React.useContext(AppContext);
+  const { favorites } = React.useContext(AppContext);
+  
 
   return (
     <div className={styles.content}>
@@ -21,7 +22,7 @@ function Favorites() {
               <Card
                 phone={item}
                 key={index}
-                favorited={true}
+                favorited={true}         
                 {...item}
               />
             ))}
