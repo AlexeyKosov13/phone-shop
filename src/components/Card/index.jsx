@@ -11,27 +11,26 @@ function Card({
   id,
   raiting,
   imageUrl,
+  myId,
+  fav = false,
   name,
   price,
-  favorited=false,
   loading = false,
   phone,
 }) {
-  const [isFavorite, setIsFavorite] = React.useState(favorited);
-  const [isAdded, setIsAdded] = React.useState(false);
+  const [isFavorite, setIsFavorite] = React.useState(fav);
   const { isItemAdded } = React.useContext(AppContext);
-  const { isFavoritAdded } = React.useContext(AppContext);
   const { onAddToFavorites } = React.useContext(AppContext);
   const { onAddToCart } = React.useContext(AppContext);
-  const obj ={id, parentId: id, name, imageUrl, price}
- 
+  const obj = { id, fav, parentId: id, myId, name, imageUrl, price };
+
   const onClickPlus = () => {
     onAddToCart(obj);
-    setIsAdded(!isAdded);
+    // setIsAdded(!isAdded);
   };
 
   const onClickFavorite = () => {
-    onAddToFavorites(obj);
+    onAddToFavorites(phone);
     setIsFavorite(!isFavorite);
   };
 
@@ -65,20 +64,23 @@ function Card({
       ) : (
         <>
           <div className={styles.head__block}>
+
             <div className={styles.favorite}>
-             
+
+
+              {true && (
                 <img
                   src={
-                    isFavoritAdded(obj.parentId)
+                    isFavorite
                       ? "img/heart__liked.svg"
                       : "img/heart__unliked.svg"
                   }
                   alt="favorite"
                   onClick={onClickFavorite}
                 />
-            
-             
+              )}
             </div>
+
             <div className={styles.raiting}>
               <img src="img/star.svg" alt="star" />
               {raiting}
@@ -103,15 +105,19 @@ function Card({
               <p>{price} руб.</p>
             </div>
             {onAddToCart && (
-                <img
+              <img
                 className={styles.plus}
-                  onClick={onClickPlus}
-                  src={isItemAdded(obj.parentId) ? 'img/btn__checked.svg' : 'img/btn__plus.svg'}
-                  alt='plus'
+                onClick={onClickPlus}
+                //======
+                src={
+                  isItemAdded(obj.parentId)
+                    ? "img/btn__checked.svg"
+                    : "img/btn__plus.svg"
+                }
+                alt="plus"
               />
             )}
           </div>
-          
         </>
       )}
     </div>

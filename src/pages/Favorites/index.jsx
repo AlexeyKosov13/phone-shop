@@ -5,9 +5,8 @@ import AppContext from "../../context";
 import styles from "./Favorites.module.scss";
 
 function Favorites() {
-  const { favorites } = React.useContext(AppContext);
+  const {items } = React.useContext(AppContext);
   
-
   return (
     <div className={styles.content}>
       <div className={styles.content__header}>
@@ -18,13 +17,13 @@ function Favorites() {
 
       <div className={styles.content__favorites}>
 
-        {favorites.map((item, index) => (
-              <Card
+        {items.map((item, index) => (
+          item.fav && 
+              (<Card
                 phone={item}
-                key={index}
-                favorited={true}         
+                key={index}       
                 {...item}
-              />
+              />)
             ))}
       </div>
       

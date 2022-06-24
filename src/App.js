@@ -22,6 +22,7 @@ function App() {
   const base = "https://62041896c6d8b20017dc3427.mockapi.io";
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
+
   const [favorites, setFavorites] = React.useState([]);
   const [orders, setOrders] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState("");
@@ -37,12 +38,11 @@ function App() {
       try {
         setIsLoading(true);
         const cartResponse = await axios.get(`${base}/Cart`);
-        const favoritesResponse = await axios.get(`${base}/favorites`);
         const itemsResponse = await axios.get(`${base}/Items`);
         setIsLoading(false);
         setCartItems(cartResponse.data);
-        setFavorites(favoritesResponse.data);
         setItems(itemsResponse.data);
+        setFavorites(itemsResponse.data.map((item => item.fav=== true?item:null)))
       } catch (error) {
         alert("Ошибка при запросе данных");
       }
@@ -53,6 +53,8 @@ function App() {
 
   const onAddToCart = async (obj) => {
     try {
+
+      //====получаем карточку у котрой совпали id
       const findItem = cartItems.find(
         (item) => Number(item.parentId) === Number(obj.id)
       );
@@ -64,30 +66,28 @@ function App() {
       } else {
         const { data } = await axios.post(`${base}/Cart`, obj);
         setCartItems((prev) => [...prev, data]);
-        console.log(cartItems);
       }
     } catch (error) {
       alert("Ошибка при добавлении в корзину");
     }
   };
 
+  //===============добавляем в фавориты ========
+
   const onAddToFavorites = async (obj) => {
-    console.log(obj)
     try {
-      if (favorites.find((favObj) => Number(favObj.parentId) === Number(obj.id))) 
-      {
-        axios.delete(`${base}/favorites/${obj.id}`);
-        setFavorites((prev) =>
-          prev.filter((item) => Number(item.id) !== Number(obj.id))
-        );
-      } else {
-        const { data } = await axios.post(`${base}/favorites`, obj);
-        setFavorites((prev) => [...prev, data]);
-      }
+      const temp = {...obj};
+      temp.fav = !temp.fav;
+      await axios.put(`${base}/Items/${obj.id}`, temp);
+      const itemsResponse = await axios.get(`${base}/Items`);
+      setItems(itemsResponse.data);
+
     } catch (error) {
       alert("Не удалось добавить");
     }
   };
+
+  //================удаление из корзины==========
 
   const onRemoveItem = (id) => {
     try {
@@ -135,14 +135,9 @@ function App() {
         }
   };
   
-
-  const isFavoritAdded = (id) => {
-    return favorites.some((obj) => Number(obj.parentId) === Number(id));
-  };
-
-
-  const isItemAdded = (id) => {
-    return cartItems.some((obj) => Number(obj.parentId) === Number(id));
+//===============проверка есть ли в общем массиве телефон такой же как и в корзине по id======
+  const isItemAdded = (id) => {   
+    return cartItems.some((obj) => Number(obj.id) === Number(id));
   };
 
   return (
@@ -160,7 +155,6 @@ function App() {
             favorites,
             setFavorites,
             isItemAdded,
-            isFavoritAdded,
             onAddToCart,
             searchValue,
             setSearchValue,
