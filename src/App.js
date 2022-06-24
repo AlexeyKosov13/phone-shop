@@ -22,7 +22,6 @@ function App() {
   const base = "https://62041896c6d8b20017dc3427.mockapi.io";
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
-
   const [favorites, setFavorites] = React.useState([]);
   const [orders, setOrders] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState("");
@@ -51,6 +50,8 @@ function App() {
     fetchData();
   }, []);
 
+
+  //==================добавление в корзину ==========
   const onAddToCart = async (obj) => {
     try {
 
@@ -137,7 +138,7 @@ function App() {
   
 //===============проверка есть ли в общем массиве телефон такой же как и в корзине по id======
   const isItemAdded = (id) => {   
-    return cartItems.some((obj) => Number(obj.id) === Number(id));
+    return cartItems.some((obj) => Number(obj.parentId) === Number(id));
   };
 
   return (

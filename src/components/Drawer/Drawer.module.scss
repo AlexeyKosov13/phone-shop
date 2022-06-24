@@ -35,12 +35,7 @@
   transition: transform 0.3s ease-in-out;
 }
 
-.cart__items {
-  display: flex;
-  flex-direction: column;
-  height: 500px;
-  overflow: auto;
-}
+
 
 .overlayVisible {
   visibility: visible;
@@ -98,6 +93,13 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+}
+
+.cart__items {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  overflow: scroll;
 }
 
 .cart__item {

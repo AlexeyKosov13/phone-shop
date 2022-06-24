@@ -11,7 +11,6 @@ function Card({
   id,
   raiting,
   imageUrl,
-  myId,
   fav = false,
   name,
   price,
@@ -22,11 +21,9 @@ function Card({
   const { isItemAdded } = React.useContext(AppContext);
   const { onAddToFavorites } = React.useContext(AppContext);
   const { onAddToCart } = React.useContext(AppContext);
-  const obj = { id, fav, parentId: id, myId, name, imageUrl, price };
 
   const onClickPlus = () => {
-    onAddToCart(obj);
-    // setIsAdded(!isAdded);
+    onAddToCart(phone);
   };
 
   const onClickFavorite = () => {
@@ -64,9 +61,7 @@ function Card({
       ) : (
         <>
           <div className={styles.head__block}>
-
             <div className={styles.favorite}>
-
 
               {true && (
                 <img
@@ -95,7 +90,7 @@ function Card({
             height={142}
             className={styles.card__image}
           />
-          <Link to="/phonePage" onClick={componentDidUpdate}>
+          <Link to="/phonePage" onClick={componentDidUpdate} isFavorite={isFavorite}>
             <p className={styles.card__name}>{name}</p>
           </Link>
 
@@ -106,15 +101,14 @@ function Card({
             </div>
             {onAddToCart && (
               <img
-                className={styles.plus}
-                onClick={onClickPlus}
-                //======
                 src={
-                  isItemAdded(obj.parentId)
+                  isItemAdded(phone.parentId)
                     ? "img/btn__checked.svg"
                     : "img/btn__plus.svg"
                 }
                 alt="plus"
+                className={styles.plus}
+                onClick={onClickPlus}
               />
             )}
           </div>

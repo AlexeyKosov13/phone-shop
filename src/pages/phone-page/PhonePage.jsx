@@ -11,7 +11,7 @@ function PhonePage() {
   const { isFavoritAdded } = React.useContext(AppContext);
   const { onAddToCart } = React.useContext(AppContext);
   const { isItemAdded } = React.useContext(AppContext);
-  const { isFavorite, setIsFavorite} = React.useContext(AppContext);
+  const { isFavorite, setIsFavorite } = React.useState(true);
 
   const phone = useSelector((state) => state.phone.currentPhone);
 
@@ -22,9 +22,8 @@ function PhonePage() {
 
   const onClickFavorite = () => {
     onAddToFavorites(phone);
+    setIsFavorite(!isFavorite);
   };
-
-  
 
   return (
     <div className={styles.phone}>
@@ -32,14 +31,20 @@ function PhonePage() {
         <div className="phone__blockTitle">
           <h2 className={styles.phone__title}>{phone.name}</h2>
           <div className={styles.phone__favorite}>
-          <img src={isFavoritAdded(phone.parentId)? "img/heart__liked.svg"
-                      : "img/heart__unliked.svg"}
+            
+          {true && (
+                <img
+                  src={
+                    phone.fav
+                      ? "img/heart__liked.svg"
+                      : "img/heart__unliked.svg"
+                  }
                   alt="favorite"
                   onClick={onClickFavorite}
                 />
-            </div>
+              )}
+          </div>
         </div>
-        
 
         <div className={styles.phone__block}>
           <div className={styles.phone__img}>
@@ -77,7 +82,6 @@ function PhonePage() {
                   alt='plus'
               />
             )} */}
-            
           </div>
         </div>
       </div>
