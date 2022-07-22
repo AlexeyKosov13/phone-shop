@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './ItemsCart.module.scss';
 
 function ItemsCart({quantity=0}) {

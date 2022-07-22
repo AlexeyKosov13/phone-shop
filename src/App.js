@@ -1,7 +1,8 @@
-import React from "react";
+import {useEffect, useState} from "react";
 import { HashRouter, Route } from "react-router-dom";
 import axios from "axios";
 import { Provider } from "react-redux";
+import { store } from "./redux";
 
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
@@ -15,24 +16,22 @@ import Footer from "./components/Footer";
 import About from "./pages/About/About";
 import AboutPhone from "./components/AboutPhone";
 import AppContext from "./context";
-import { store } from "./redux";
 import Place from "./pages/Place/Place";
 
 function App() {
   const base = "https://62041896c6d8b20017dc3427.mockapi.io";
-  const [items, setItems] = React.useState([]);
-  const [cartItems, setCartItems] = React.useState([]);
-  const [favorites, setFavorites] = React.useState([]);
-  const [orders, setOrders] = React.useState([]);
-  const [searchValue, setSearchValue] = React.useState("");
-  const [cartOpened, setCartOpened] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [aboutOpened, setAboutOpened] = React.useState(false);
-  const [filters, setFilter] = React.useState(0);
-  
+  const [items, setItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+  const [cartOpened, setCartOpened] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isPutFavorit, setIsPutFavorit] = useState(true);
+  const [aboutOpened, setAboutOpened] = useState(false);
+  const [filter, setFilter] = useState("raitingDown");
 
-
-  React.useEffect(() => {
+  useEffect(() => {
     async function fetchData() {
       try {
         setIsLoading(true);
@@ -41,20 +40,45 @@ function App() {
         setIsLoading(false);
         setCartItems(cartResponse.data);
         setItems(itemsResponse.data);
-        setFavorites(itemsResponse.data.map((item => item.fav=== true?item:null)))
+        setFavorites(itemsResponse.data.map((item => item.fav === true?item:null)))
       } catch (error) {
         alert("Ошибка при запросе данных");
       }
     }
-
     fetchData();
   }, []);
+
+
+  //======================сортировка 4 вида =====================
+  useEffect(() => {
+    if (filter === "raitingUp") {
+      setItems((prev) =>
+        [...prev].sort((a, b) => a.raiting-b.raiting)
+      );
+    } else if (filter === "raitingDown") {
+      setItems((prev) =>
+        [...prev].sort((a, b) => b.raiting-a.raiting)
+      );
+    } else if (filter === "priceUp") {
+      setItems((prev) =>
+        [...prev].sort((a, b) => a.price - b.price)
+      );
+    }else if (filter === "priceDown") {
+      setItems((prev) =>
+        [...prev].sort((a, b) => b.price - a.price)
+      );
+    }
+    else {
+      setItems((prev) =>
+        [...prev].sort((a, b) => b.price - a.price)
+      );
+    }
+  },[filter])
 
 
   //==================добавление в корзину ==========
   const onAddToCart = async (obj) => {
     try {
-
       //====получаем карточку у котрой совпали id
       const findItem = cartItems.find(
         (item) => Number(item.parentId) === Number(obj.id)
@@ -77,12 +101,13 @@ function App() {
 
   const onAddToFavorites = async (obj) => {
     try {
+      setIsPutFavorit(false);
       const temp = {...obj};
       temp.fav = !temp.fav;
       await axios.put(`${base}/Items/${obj.id}`, temp);
       const itemsResponse = await axios.get(`${base}/Items`);
       setItems(itemsResponse.data);
-
+      setIsPutFavorit(true);
     } catch (error) {
       alert("Не удалось добавить");
     }
@@ -104,37 +129,6 @@ function App() {
   const onChangeSearchInput = (event) => {
     setSearchValue(event.target.value);
   };
-
-  const addFilter = (event) => {
-    setFilter(event.target.value);
-    onChangeFilter();
-  };
-
-  const onChangeFilter = () => {
-    let res;
-        switch (filters) {
-            case "priceUp":
-                res = items.sort((a, b) => a.price - b.price);
-                setItems(res);
-              break;
-            case "priceDown":
-                res = items.sort((a, b) => b.price - a.price);
-                setItems(res);
-              break;
-            case "raitingUp":
-               res = items.sort((a, b) => a.raiting-b.raiting);
-                setItems(res);
-            break;
-            case "raitingDown":
-              res = items.sort((a, b) => b.raiting-a.raiting);
-               setItems(res);
-             break;
-            default:
-              res = items.sort((a, b) => a.price - b.price);
-              setItems(res);
-            break;
-        }
-  };
   
 //===============проверка есть ли в общем массиве телефон такой же как и в корзине по id======
   const isItemAdded = (id) => {   
@@ -148,7 +142,7 @@ function App() {
           value={{
             items,
             orders,
-            filters,
+            filter,
             setFilter,
             setItems,
             setOrders,
@@ -165,9 +159,8 @@ function App() {
             aboutOpened,
             setAboutOpened,
             isLoading,
+            isPutFavorit,
             onChangeSearchInput,
-            onChangeFilter,
-            addFilter,
           }}
         >
           <div className="wrapper">
@@ -202,7 +195,7 @@ function App() {
               <Delivery />
             </Route>
 
-            <Route path="/phonePage" exact>
+            <Route path="/phonePage/:id" exact>
               <PhonePage />
             </Route>
 

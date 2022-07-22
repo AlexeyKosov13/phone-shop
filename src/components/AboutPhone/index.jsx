@@ -1,9 +1,10 @@
-import React from 'react';
+import {useContext} from 'react';
 import AppContext from '../../context';
+
 import styles from './AboutPhone.module.scss';
 
 function AboutPhone({phone}) {
-  const { aboutOpened } = React.useContext(AppContext);
+  const { aboutOpened } = useContext(AppContext);
   
   return (
     <div className={`${styles.about__overlay}  ${aboutOpened ? styles.overlayVisible : ''}`}>

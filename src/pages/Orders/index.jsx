@@ -1,4 +1,4 @@
-import React from "react";
+import {useContext, useEffect} from "react";
 import axios from "axios";
 import Card from "../../components/Card";
 import AppContext from "../../context";
@@ -6,11 +6,11 @@ import AppContext from "../../context";
 import styles from './Orders.module.scss';
 
 function Orders() {
-  const { orders, setOrders } = React.useContext(AppContext);
-  const { isItemAdded } = React.useContext(AppContext);
-  const { isLoading, setIsLoading } = React.useContext(AppContext);
+  const { orders, setOrders } = useContext(AppContext);
+  const { isItemAdded } = useContext(AppContext);
+  const { isLoading, setIsLoading } = useContext(AppContext);
   
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       try {
         const { data } = await axios.get('https://62041896c6d8b20017dc3427.mockapi.io/orders');

@@ -1,4 +1,4 @@
-import React from "react";
+import {useContext, useState} from "react";
 import ContentLoader from "react-content-loader";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -17,10 +17,10 @@ function Card({
   loading = false,
   phone,
 }) {
-  const [isFavorite, setIsFavorite] = React.useState(fav);
-  const { isItemAdded } = React.useContext(AppContext);
-  const { onAddToFavorites } = React.useContext(AppContext);
-  const { onAddToCart } = React.useContext(AppContext);
+  const [isFavorite, setIsFavorite] = useState(fav);
+  const { isItemAdded } = useContext(AppContext);
+  const { onAddToFavorites } = useContext(AppContext);
+  const { onAddToCart } = useContext(AppContext);
 
   const onClickPlus = () => {
     onAddToCart(phone);
@@ -90,7 +90,7 @@ function Card({
             height={142}
             className={styles.card__image}
           />
-          <Link to="/phonePage" onClick={componentDidUpdate} isFavorite={isFavorite}>
+          <Link to={`/phonePage/${id}`} >
             <p className={styles.card__name}>{name}</p>
           </Link>
 

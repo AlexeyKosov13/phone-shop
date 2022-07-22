@@ -1,28 +1,41 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import { useContext, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Tabs from "../../components/Tabs";
 import AppContext from "../../context";
+import axios from "axios";
 
 import styles from "./PhonePage.module.scss";
 
 function PhonePage() {
-  const { cartItems } = React.useContext(AppContext);
-  const { onAddToFavorites } = React.useContext(AppContext);
-  const { isFavoritAdded } = React.useContext(AppContext);
-  const { onAddToCart } = React.useContext(AppContext);
-  const { isItemAdded } = React.useContext(AppContext);
-  const { isFavorite, setIsFavorite } = React.useState(true);
+  const {id} = useParams();
 
-  const phone = useSelector((state) => state.phone.currentPhone);
+  useEffect(() => {
+     async function fetchData() {
+      try {      
+        const itemResponse = await axios.get(`https://62041896c6d8b20017dc3427.mockapi.io/Items/${id}`);     
+        setPhone(itemResponse.data);
+      } catch (error) {
+        alert("Ошибка при запросе данных");
+      }
+    }
+    fetchData();
 
+},[])
+
+  const { onAddToFavorites } = useContext(AppContext);
+  const { onAddToCart } = useContext(AppContext);
+  const { isItemAdded } = useContext(AppContext);
+  const [phone, setPhone] = useState({});
+  const [ isFavorite, setIsFavorite ] = useState(phone.fav);
+  
   const onClickPlus = () => {
     onAddToCart(phone);
     isItemAdded(phone.id);
   };
 
   const onClickFavorite = () => {
-    onAddToFavorites(phone);
     setIsFavorite(!isFavorite);
+    onAddToFavorites(phone);
   };
 
   return (
@@ -31,18 +44,15 @@ function PhonePage() {
         <div className="phone__blockTitle">
           <h2 className={styles.phone__title}>{phone.name}</h2>
           <div className={styles.phone__favorite}>
-            
-          {true && (
-                <img
-                  src={
-                    phone.fav
-                      ? "img/heart__liked.svg"
-                      : "img/heart__unliked.svg"
-                  }
-                  alt="favorite"
-                  onClick={onClickFavorite}
-                />
-              )}
+            {phone && (
+              <img
+                src={
+                  isFavorite ? "img/heart__liked.svg" : "img/heart__unliked.svg"
+                }
+                alt="favorite"
+                onClick={onClickFavorite}
+              />
+            )}
           </div>
         </div>
 
@@ -74,14 +84,18 @@ function PhonePage() {
           </div>
           <div className={styles.phone__price}>
             {phone.price} руб.
-            {/* {onPlus && (
-                <img
+            {phone && (
+              <img
                 className={styles.plus}
-                  onClick={onClickPlus}
-                  src={isItemAdded(obj.parentId) ? 'img/btn__checked.svg' : 'img/btn__plus.svg'}
-                  alt='plus'
+                onClick={onClickPlus}
+                src={
+                  isItemAdded(phone.parentId)
+                    ? "img/btn__checked.svg"
+                    : "img/btn__plus.svg"
+                }
+                alt="plus"
               />
-            )} */}
+            )}
           </div>
         </div>
       </div>

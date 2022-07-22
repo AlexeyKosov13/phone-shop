@@ -1,4 +1,4 @@
-import React from "react";
+import {useContext} from "react";
 import Card from "../../components/Card";
 import Filters from "../../components/Filters";
 import AppContext from "../../context";
@@ -7,10 +7,11 @@ import styles from "./Home.module.scss";
 
 function Home() {
 
-  const { items } = React.useContext(AppContext);
-  const { searchValue, setSearchValue } = React.useContext(AppContext);
-  const { isLoading } = React.useContext(AppContext);
-  const { onChangeSearchInput } = React.useContext(AppContext);
+  const { items } = useContext(AppContext);
+  const { searchValue, setSearchValue } = useContext(AppContext);
+  const { isLoading } = useContext(AppContext);
+  const { onChangeSearchInput } = useContext(AppContext);
+  
 
   const renderItems = () => {
     const filteredItems = items.filter((item) =>
@@ -54,7 +55,7 @@ function Home() {
         </div>
       </div>
 
-      <div className={styles.products}>{renderItems()}</div>
+      {<div className={styles.products}>{renderItems()}</div>}
     </div>
   );
 }

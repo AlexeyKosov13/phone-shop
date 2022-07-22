@@ -1,11 +1,11 @@
-import React from "react";
+import {useContext} from "react";
 import Card from "../../components/Card";
 import AppContext from "../../context";
 
 import styles from "./Favorites.module.scss";
 
 function Favorites() {
-  const {items } = React.useContext(AppContext);
+  const {items } = useContext(AppContext);
   
   return (
     <div className={styles.content}>

@@ -1,6 +1,14 @@
 .filters {
     display: flex;
     font-size: 12px;
+    align-items: center;
+
+    select {
+        border-radius: 10px;
+        border: 1px solid #f3f3f3;
+        padding: 5px 15px;
+        font-size: 12px;
+    }
 
     &__item {
         margin-left: 5px;

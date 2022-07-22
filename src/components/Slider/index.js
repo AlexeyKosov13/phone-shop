@@ -1,6 +1,5 @@
-import React, { useRef } from 'react';
-import Swiper from 'react-id-swiper';
-import AppContext from '../../context';
+
+import Swiper from "react-id-swiper";
 
 const Slider = ({src}) => {
 

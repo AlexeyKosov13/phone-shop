@@ -1,4 +1,4 @@
-import React from "react";
+import {useContext} from "react";
 import { Link } from "react-router-dom";
 import {useCart} from "../../hooks/useCart";
 import ItemsCart from "../ItemsCart";
@@ -7,7 +7,7 @@ import styles from "./Header.module.scss";
 
 function Header({onClickCart}) {
   const { totalPrice } = useCart();
-  const { cartItems } = React.useContext(AppContext);
+  const { cartItems } = useContext(AppContext);
 
   return (
     <header className={styles.header}>
