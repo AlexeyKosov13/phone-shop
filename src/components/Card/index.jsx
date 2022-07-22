@@ -90,7 +90,7 @@ function Card({
             height={142}
             className={styles.card__image}
           />
-          <Link to={`/phonePage/${id}`} >
+          <Link to={`/phonePage/${id}`} onClick={componentDidUpdate()} >
             <p className={styles.card__name}>{name}</p>
           </Link>
 
