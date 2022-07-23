@@ -26,7 +26,6 @@ function PhonePage() {
   const { onAddToCart } = useContext(AppContext);
   const { isItemAdded } = useContext(AppContext);
   const [phone, setPhone] = useState({});
-  const [ isFavorite, setIsFavorite ] = useState(phone.fav);
   
   const onClickPlus = () => {
     onAddToCart(phone);
@@ -34,7 +33,9 @@ function PhonePage() {
   };
 
   const onClickFavorite = () => {
-    setIsFavorite(!isFavorite);
+    const item = {...phone};
+    item.fav = !item.fav;
+    setPhone(item);
     onAddToFavorites(phone);
   };
 
@@ -47,7 +48,7 @@ function PhonePage() {
             {phone && (
               <img
                 src={
-                  isFavorite ? "img/heart__liked.svg" : "img/heart__unliked.svg"
+                 phone.fav ? "img/heart__liked.svg" : "img/heart__unliked.svg"
                 }
                 alt="favorite"
                 onClick={onClickFavorite}

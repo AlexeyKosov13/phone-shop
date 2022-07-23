@@ -11,24 +11,26 @@ function Card({
   id,
   raiting,
   imageUrl,
-  fav = false,
   name,
   price,
   loading = false,
   phone,
 }) {
-  const [isFavorite, setIsFavorite] = useState(fav);
   const { isItemAdded } = useContext(AppContext);
   const { onAddToFavorites } = useContext(AppContext);
   const { onAddToCart } = useContext(AppContext);
+  const [product, setProduct] = useState(phone);
 
   const onClickPlus = () => {
     onAddToCart(phone);
   };
 
   const onClickFavorite = () => {
-    onAddToFavorites(phone);
-    setIsFavorite(!isFavorite);
+    const item = {...product};
+    item.fav = !item.fav;
+    setProduct(item);
+    console.log(product);
+    onAddToFavorites(product);
   };
 
   const dispatch = useDispatch();
@@ -66,7 +68,7 @@ function Card({
               {true && (
                 <img
                   src={
-                    isFavorite
+                    product.fav
                       ? "img/heart__liked.svg"
                       : "img/heart__unliked.svg"
                   }

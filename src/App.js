@@ -62,7 +62,9 @@ function App() {
     } else if (filter === "priceUp") {
       setItems((prev) =>
         [...prev].sort((a, b) => a.price - b.price)
+        
       );
+      console.log(items);
     }else if (filter === "priceDown") {
       setItems((prev) =>
         [...prev].sort((a, b) => b.price - a.price)
