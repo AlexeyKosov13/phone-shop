@@ -1,16 +1,19 @@
-import { useContext} from "react";
+import { useContext } from "react";
 import ContentLoader from "react-content-loader";
+import { Navigation, Pagination } from "swiper";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import AppContext from "../../context";
 import { setCurrentPhone } from "../../redux/phones/reducer";
-import Slider from "../Slider/";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 import styles from "./Card.module.scss";
 
-function Card({
-  loading = false,
-  phone,
-}) {
+function Card({ loading = false, phone }) {
   const { isItemAdded } = useContext(AppContext);
   const { isDownloadFavorit } = useContext(AppContext);
   const { onAddToFavorites } = useContext(AppContext);
@@ -30,11 +33,9 @@ function Card({
     dispatch(setCurrentPhone(phone));
   };
 
-
-
   return (
     <div className={styles.card} onClick={handleClick}>
-      {loading  ? (
+      {loading ? (
         <ContentLoader
           speed={2}
           width={150}
@@ -53,18 +54,19 @@ function Card({
         <>
           <div className={styles.head__block}>
             <div className={styles.favorite}>
-              { isDownloadFavorit ? (
+              {isDownloadFavorit ? (
                 <img
                   src={
-                    phone.fav 
+                    phone.fav
                       ? "img/heart__liked.svg"
                       : "img/heart__unliked.svg"
                   }
                   alt="favorite"
                   onClick={onClickFavorite}
                 />
-              ):<div class={styles.asyncSpinner}></div>}
-
+              ) : (
+                <div className={styles.asyncSpinner}></div>
+              )}
             </div>
 
             <div className={styles.raiting}>
@@ -73,15 +75,33 @@ function Card({
             </div>
           </div>
 
-          {/* <Slider src={imageUrl}/> */}
-          <img
-            src={phone.imageUrl}
-            alt="phone"
-            width={133}
-            height={142}
-            className={styles.card__image}
-          />
-          <Link to={`/phonePage/${phone.id}`} >
+          <Swiper
+            navigation={true}
+            pagination={{
+              dynamicBullets: true,
+            }}
+            modules={[Pagination, Navigation]}
+            className={styles.swiper}
+          >
+            <SwiperSlide className={styles.swiperSlide}>
+              <div className={styles.imgWrapper}>
+                <img src={phone.imageUrl} alt="phone" />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className={styles.swiperSlide}>
+              <div className={styles.imgWrapper}>
+                <img src={phone.imageUrl} alt="phone" />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className={styles.swiperSlide}>
+              <div className={styles.imgWrapper}>
+                <img src={phone.imageUrl} alt="phone" />
+              </div>
+            </SwiperSlide>
+          </Swiper>
+
+
+          <Link to={`/phonePage/${phone.id}`}>
             <p className={styles.card__name}>{phone.name}</p>
           </Link>
 

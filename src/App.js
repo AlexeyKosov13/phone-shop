@@ -52,21 +52,25 @@ function App() {
 
 
   //======================сортировка 4 вида =====================
-  useEffect(() => {
-    if (filter === "raitingUp") {
+  useEffect(() => {  
+      sortPhones(filter);   
+  },[filter, items])
+
+  const sortPhones =(sort) => {
+    if (sort === "raitingUp") {
       setItemsSort((prev) =>
         [...prev].sort((a, b) => a.raiting-b.raiting)
       );
-    } else if (filter === "raitingDown") {
+    } else if (sort === "raitingDown") {
       setItemsSort((prev) =>
         [...prev].sort((a, b) => b.raiting-a.raiting)
       );
-    } else if (filter === "priceUp") {
+    } else if (sort === "priceUp") {
       setItemsSort((prev) =>
         [...prev].sort((a, b) => a.price - b.price)
         
       );
-    }else if (filter === "priceDown") {
+    }else if (sort === "priceDown") {
       setItemsSort((prev) =>
         [...prev].sort((a, b) => b.price - a.price)
       );
@@ -76,7 +80,7 @@ function App() {
         [...prev].sort((a, b) => b.price - a.price)
       );
     }
-  },[filter, itemsSort])
+  }
 
 
   //==================добавление в корзину ==========
@@ -168,6 +172,7 @@ function App() {
             setAboutOpened,
             isLoading,
             isDownloadFavorit,
+            sortPhones,
             onChangeSearchInput,
           }}
         >

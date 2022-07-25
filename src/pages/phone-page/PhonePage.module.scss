@@ -6,6 +6,11 @@
         margin-bottom: 40px;
     }
 
+    &__img {
+        width: 200px;
+        height: 260px;
+    }
+
     &__block {
        display: flex; 
        justify-content: space-between;
@@ -88,6 +93,8 @@
     }
 }
 
+// ======================spinner loader================
+
 @keyframes spinner {
     to {transform: rotate(360deg);}
 }
@@ -111,6 +118,54 @@
         animation: spinner .6s linear infinite;
     }
 }
+
+
+
+// ===============slider swiper===================
+.swiper {
+    width: 100%;
+    height: 270px;
+  }
+  
+.swiperSlide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    padding-top: 20px;
+    padding-bottom: 10px;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center; 
+}
+  
+.swiperSlide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.swiper-pagination {
+    display: none;
+ }
+
+.imgWrapper {
+    width: 100%;
+    height: 210px;
+}
+  
+
 
 
 

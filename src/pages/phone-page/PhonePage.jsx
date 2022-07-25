@@ -1,10 +1,17 @@
 import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Navigation, Pagination } from "swiper";
 import ContentLoader from "react-content-loader";
 import Tabs from "../../components/Tabs";
 import AppContext from "../../context";
 import axios from "axios";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 import styles from "./PhonePage.module.scss";
 
 function PhonePage() {
@@ -85,14 +92,41 @@ function PhonePage() {
                 alt="favorite"
                 onClick={onClickFavorite}
               />
-            ):<div class={styles.asyncSpinner}></div>} 
+            ):<div className={styles.asyncSpinner}></div>} 
           </div>
         </div>
 
         <div className={styles.phone__block}>
+         
           <div className={styles.phone__img}>
-            <img src={phone.imageUrl} alt={phone.name} />
-          </div>
+          <Swiper
+            navigation={true}
+            pagination={{
+              dynamicBullets: true,
+            }}
+            modules={[Pagination, Navigation]}
+            className={styles.swiper}
+          >
+            <SwiperSlide className={styles.swiperSlide}>
+              <div className={styles.imgWrapper}>
+                <img src={phone.imageUrl} alt="phone" />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className={styles.swiperSlide}>
+              <div className={styles.imgWrapper}>
+                <img src={phone.imageUrl} alt="phone" />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className={styles.swiperSlide}>
+              <div className={styles.imgWrapper}>
+                <img src={phone.imageUrl} alt="phone" />
+              </div>
+            </SwiperSlide>
+          </Swiper>
+            </div>     
+          
+
+
           <div className={styles.phone__descr}>
             <div className={styles.raiting}>
               <img src="img/star.svg" alt="star" />
