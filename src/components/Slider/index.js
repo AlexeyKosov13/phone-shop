@@ -18,8 +18,7 @@ const Slider = ({src}) => {
   return (
     <div>
       <Swiper {...params}>
-        <div><img src={src} alt="photoPhone"/></div>
-      
+        <div><img src={src} alt="photoPhone"/></div> 
         <div><img src={src} alt="photoPhone"/></div>
         <div><img src={src} alt="photoPhone"/></div>
         <div><img src={src} alt="photoPhone"/></div>

@@ -23,6 +23,7 @@ function PhonePage() {
 },[])
 
   const { onAddToFavorites } = useContext(AppContext);
+  const { isDownloadFavorit } = useContext(AppContext);
   const { onAddToCart } = useContext(AppContext);
   const { isItemAdded } = useContext(AppContext);
   const [phone, setPhone] = useState({});
@@ -45,7 +46,7 @@ function PhonePage() {
         <div className="phone__blockTitle">
           <h2 className={styles.phone__title}>{phone.name}</h2>
           <div className={styles.phone__favorite}>
-            {phone && (
+            {isDownloadFavorit? (
               <img
                 src={
                  phone.fav ? "img/heart__liked.svg" : "img/heart__unliked.svg"
@@ -53,7 +54,7 @@ function PhonePage() {
                 alt="favorite"
                 onClick={onClickFavorite}
               />
-            )}
+            ):<div class={styles.asyncSpinner}></div>} 
           </div>
         </div>
 

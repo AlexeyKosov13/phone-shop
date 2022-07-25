@@ -7,17 +7,16 @@ import styles from "./Home.module.scss";
 
 function Home() {
 
-  const { items } = useContext(AppContext);
+  const { itemsSort } = useContext(AppContext);
   const { searchValue, setSearchValue } = useContext(AppContext);
   const { isLoading } = useContext(AppContext);
   const { onChangeSearchInput } = useContext(AppContext);
   
 
   const renderItems = () => {
-    const filteredItems = items.filter((item) =>
+    const filteredItems = itemsSort.filter((item) =>
       item.name.toLowerCase().includes(searchValue.toLowerCase())
     );
-
     return (isLoading ? [...Array(8)] : filteredItems).map((item, index) => (
       <Card
         phone={item}

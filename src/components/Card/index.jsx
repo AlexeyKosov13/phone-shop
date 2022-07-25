@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import { useContext, useState } from "react";
 import ContentLoader from "react-content-loader";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -8,29 +8,20 @@ import Slider from "../Slider/";
 import styles from "./Card.module.scss";
 
 function Card({
-  id,
-  raiting,
-  imageUrl,
-  name,
-  price,
   loading = false,
   phone,
 }) {
   const { isItemAdded } = useContext(AppContext);
+  const { isDownloadFavorit } = useContext(AppContext);
   const { onAddToFavorites } = useContext(AppContext);
   const { onAddToCart } = useContext(AppContext);
-  const [product, setProduct] = useState(phone);
 
   const onClickPlus = () => {
     onAddToCart(phone);
   };
 
   const onClickFavorite = () => {
-    const item = {...product};
-    item.fav = !item.fav;
-    setProduct(item);
-    console.log(product);
-    onAddToFavorites(product);
+    onAddToFavorites(phone);
   };
 
   const dispatch = useDispatch();
@@ -39,13 +30,11 @@ function Card({
     dispatch(setCurrentPhone(phone));
   };
 
-  const componentDidUpdate = () => {
-    window.scrollTo(0, 0);
-  };
+
 
   return (
     <div className={styles.card} onClick={handleClick}>
-      {loading ? (
+      {loading  ? (
         <ContentLoader
           speed={2}
           width={150}
@@ -64,42 +53,42 @@ function Card({
         <>
           <div className={styles.head__block}>
             <div className={styles.favorite}>
-
-              {true && (
+              { isDownloadFavorit ? (
                 <img
                   src={
-                    product.fav
+                    phone.fav 
                       ? "img/heart__liked.svg"
                       : "img/heart__unliked.svg"
                   }
                   alt="favorite"
                   onClick={onClickFavorite}
                 />
-              )}
+              ):<div class={styles.asyncSpinner}></div>}
+
             </div>
 
             <div className={styles.raiting}>
               <img src="img/star.svg" alt="star" />
-              {raiting}
+              {phone.raiting}
             </div>
           </div>
 
           {/* <Slider src={imageUrl}/> */}
           <img
-            src={imageUrl}
+            src={phone.imageUrl}
             alt="phone"
             width={133}
             height={142}
             className={styles.card__image}
           />
-          <Link to={`/phonePage/${id}`} onClick={componentDidUpdate()} >
-            <p className={styles.card__name}>{name}</p>
+          <Link to={`/phonePage/${phone.id}`} >
+            <p className={styles.card__name}>{phone.name}</p>
           </Link>
 
           <div className={styles.card__info}>
             <div className={styles.card__price}>
               <span>Цена:</span>
-              <p>{price} руб.</p>
+              <p>{phone.price} руб.</p>
             </div>
             {onAddToCart && (
               <img

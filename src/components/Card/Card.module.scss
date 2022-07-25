@@ -37,6 +37,9 @@
 
     .favorite {
         margin-bottom: 5px;
+        width: 30px;
+        height: 30px;
+        position: relative;
     }
 
     .plus {
@@ -109,4 +112,28 @@
         justify-content: end;
     }
     
+}
+
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+}
+
+.asyncSpinner {
+    content: 'Loading...';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+
+    z-index: 1;
+    margin: auto;
+    width: 30px;
+    height: 30px;
+
+    &:not(:required) {
+        content: '';
+        border-radius: 50%;
+        border: 2px solid gray;
+        border-top-color: white;
+        border-bottom-color: white;
+        animation: spinner .6s linear infinite;
+    }
 }

@@ -21,13 +21,14 @@ import Place from "./pages/Place/Place";
 function App() {
   const base = "https://62041896c6d8b20017dc3427.mockapi.io";
   const [items, setItems] = useState([]);
+  const [itemsSort, setItemsSort] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [orders, setOrders] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [cartOpened, setCartOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [isPutFavorit, setIsPutFavorit] = useState(true);
+  const [isDownloadFavorit, setIsDownloadFavorit] = useState(true);
   const [aboutOpened, setAboutOpened] = useState(false);
   const [filter, setFilter] = useState("raitingDown");
 
@@ -40,6 +41,7 @@ function App() {
         setIsLoading(false);
         setCartItems(cartResponse.data);
         setItems(itemsResponse.data);
+        setItemsSort(itemsResponse.data);
         setFavorites(itemsResponse.data.map((item => item.fav === true?item:null)))
       } catch (error) {
         alert("Ошибка при запросе данных");
@@ -52,30 +54,29 @@ function App() {
   //======================сортировка 4 вида =====================
   useEffect(() => {
     if (filter === "raitingUp") {
-      setItems((prev) =>
+      setItemsSort((prev) =>
         [...prev].sort((a, b) => a.raiting-b.raiting)
       );
     } else if (filter === "raitingDown") {
-      setItems((prev) =>
+      setItemsSort((prev) =>
         [...prev].sort((a, b) => b.raiting-a.raiting)
       );
     } else if (filter === "priceUp") {
-      setItems((prev) =>
+      setItemsSort((prev) =>
         [...prev].sort((a, b) => a.price - b.price)
         
       );
-      console.log(items);
     }else if (filter === "priceDown") {
-      setItems((prev) =>
+      setItemsSort((prev) =>
         [...prev].sort((a, b) => b.price - a.price)
       );
     }
     else {
-      setItems((prev) =>
+      setItemsSort((prev) =>
         [...prev].sort((a, b) => b.price - a.price)
       );
     }
-  },[filter])
+  },[filter, itemsSort])
 
 
   //==================добавление в корзину ==========
@@ -89,8 +90,10 @@ function App() {
         setCartItems((prev) =>
           prev.filter((item) => Number(item.parentId) !== Number(obj.id))
         );
+        //===============удаляем если такой товар уже есть в корзине=======
         await axios.delete(`${base}/Cart/${findItem.id}`);
       } else {
+        //=============отпраляем на сервер добавленный телефон=============
         const { data } = await axios.post(`${base}/Cart`, obj);
         setCartItems((prev) => [...prev, data]);
       }
@@ -103,13 +106,14 @@ function App() {
 
   const onAddToFavorites = async (obj) => {
     try {
-      setIsPutFavorit(false);
+      setIsDownloadFavorit(false);
       const temp = {...obj};
       temp.fav = !temp.fav;
       await axios.put(`${base}/Items/${obj.id}`, temp);
       const itemsResponse = await axios.get(`${base}/Items`);
       setItems(itemsResponse.data);
-      setIsPutFavorit(true);
+      setItemsSort(itemsResponse.data);
+      setIsDownloadFavorit(true);
     } catch (error) {
       alert("Не удалось добавить");
     }
@@ -143,6 +147,7 @@ function App() {
         <AppContext.Provider
           value={{
             items,
+            itemsSort,
             orders,
             filter,
             setFilter,
@@ -150,6 +155,7 @@ function App() {
             setOrders,
             cartItems,
             favorites,
+            setItemsSort,
             setFavorites,
             isItemAdded,
             onAddToCart,
@@ -161,7 +167,7 @@ function App() {
             aboutOpened,
             setAboutOpened,
             isLoading,
-            isPutFavorit,
+            isDownloadFavorit,
             onChangeSearchInput,
           }}
         >
