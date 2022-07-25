@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import ContentLoader from "react-content-loader";
 import Tabs from "../../components/Tabs";
 import AppContext from "../../context";
 import axios from "axios";
@@ -8,18 +9,20 @@ import styles from "./PhonePage.module.scss";
 
 function PhonePage() {
   const {id} = useParams();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
      async function fetchData() {
-      try {      
+      try {    
+        setLoading(true); 
         const itemResponse = await axios.get(`https://62041896c6d8b20017dc3427.mockapi.io/Items/${id}`);     
         setPhone(itemResponse.data);
+        setLoading(false);
       } catch (error) {
         alert("Ошибка при запросе данных");
       }
     }
     fetchData();
-
 },[])
 
   const { onAddToFavorites } = useContext(AppContext);
@@ -41,7 +44,35 @@ function PhonePage() {
   };
 
   return (
-    <div className={styles.phone}>
+    <div className={styles.page}>
+  {loading ? (<ContentLoader 
+    speed={2}
+    width={1300}
+    height={800}
+    viewBox="0 0 700 500"
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
+  >
+    <rect x="22" y="41" rx="3" ry="3" width="266" height="18" /> 
+    <rect x="27" y="99" rx="0" ry="0" width="100" height="117" /> 
+    <rect x="463" y="114" rx="0" ry="0" width="76" height="91" /> 
+    <rect x="145" y="98" rx="0" ry="0" width="287" height="11" /> 
+    <rect x="145" y="121" rx="0" ry="0" width="287" height="11" /> 
+    <rect x="145" y="145" rx="0" ry="0" width="287" height="11" /> 
+    <rect x="145" y="167" rx="0" ry="0" width="287" height="11" /> 
+    <rect x="145" y="188" rx="0" ry="0" width="287" height="11" /> 
+    <rect x="145" y="207" rx="0" ry="0" width="287" height="11" /> 
+    <rect x="29" y="257" rx="0" ry="0" width="161" height="35" /> 
+    <rect x="207" y="257" rx="0" ry="0" width="161" height="35" /> 
+    <rect x="384" y="257" rx="0" ry="0" width="161" height="35" /> 
+    <rect x="38" y="319" rx="0" ry="0" width="155" height="18" /> 
+    <rect x="38" y="357" rx="0" ry="0" width="448" height="13" /> 
+    <rect x="38" y="379" rx="0" ry="0" width="448" height="13" /> 
+    <rect x="38" y="401" rx="0" ry="0" width="448" height="13" /> 
+    <rect x="38" y="424" rx="0" ry="0" width="448" height="13" /> 
+    <rect x="38" y="447" rx="0" ry="0" width="448" height="13" /> 
+    <rect x="38" y="468" rx="0" ry="0" width="448" height="13" />
+  </ContentLoader>):( <div className={styles.phone}>
       <div className={styles.block}>
         <div className="phone__blockTitle">
           <h2 className={styles.phone__title}>{phone.name}</h2>
@@ -104,6 +135,7 @@ function PhonePage() {
       <div className={styles.phone__about}>
         <Tabs phone={phone} />
       </div>
+    </div>)}
     </div>
   );
 }

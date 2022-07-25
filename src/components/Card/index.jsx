@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext} from "react";
 import ContentLoader from "react-content-loader";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
